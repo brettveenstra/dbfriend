@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{57E745BA-2E44-4E3F-A8A5-88B63EAA38B1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DbFriend.Core</RootNamespace>
+    <AssemblyName>DbFriend.Core</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AutomatedDebug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\Debug\Core\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.SqlServer.ActiveXScriptTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ASTasks, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.BulkInsertTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ConnectionInfoExtended, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Dmf, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Dmf.Adapters, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.DmfSqlClrWrapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.DmQueryTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Dts.Design, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SQLServer.DTSRuntimeWrap, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=x86" />
+    <Reference Include="Microsoft.SqlServer.Exec80PackageTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ExecProcTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.FileSystemTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ForEachAdoEnumerator, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ForEachFromVarEnumerator, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ForEachNodeListEnumerator, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ForEachSMOEnumerator, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.FtpTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.MaintenancePlanTasks, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SQLServer.ManagedDTS, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Management.Collector, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Management.CollectorEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Management.CollectorTasks, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.MSMQTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.OlapEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.PolicyEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.RegSvrEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Rmo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.SendMailTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.ServiceBrokerEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.SmoExtended, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.SqlEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.SQLTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=x86" />
+    <Reference Include="Microsoft.SqlServer.SQLTaskConnectionsWrap, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.SqlWmiManagement, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.SString, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.TableTransferGeneratorTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.TransferDatabasesTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.TransferErrorMessagesTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.TransferJobsTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.TransferLoginsTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.TransferObjectsTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.TransferSqlServerObjectsTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.TransferStoredProceduresTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.VSTAScriptingLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.WebServiceTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.WMIDRTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.WmiEnum, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.WMIEWTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.XmlTask, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="NVelocity, Version=1.0.1106.21942, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\nvelocity\NVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.5.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\StructureMap\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="CoreStackRegistry.cs" />
+    <Compile Include="Extensions\SmoExtensions.cs" />
+    <Compile Include="Generator\ConfiguredVelocityEngine.cs" />
+    <Compile Include="Generator\DbFriendGenerator.cs" />
+    <Compile Include="Generator\DbFriendGeneratorRegistry.cs" />
+    <Compile Include="Generator\DbScriptGenerator.cs" />
+    <Compile Include="Generator\DirectoryCopier.cs" />
+    <Compile Include="Generator\IConfiguredVelocityEngine.cs" />
+    <Compile Include="Generator\IDbFriendGenerator.cs" />
+    <Compile Include="Generator\IDbScriptGenerator.cs" />
+    <Compile Include="Generator\IDbSolutionGenerator.cs" />
+    <Compile Include="Generator\IDirectoryCopier.cs" />
+    <Compile Include="Generator\IScriptedFunction.cs" />
+    <Compile Include="Generator\IScriptedStoredProcedure.cs" />
+    <Compile Include="Generator\IScriptedTable.cs" />
+    <Compile Include="Generator\IScriptedView.cs" />
+    <Compile Include="Generator\IVelocityFileGenerator.cs" />
+    <Compile Include="Generator\IVelocityFileTransformer.cs" />
+    <Compile Include="Generator\ScriptedFunction.cs" />
+    <Compile Include="Generator\ScriptedStoredProcedure.cs" />
+    <Compile Include="Generator\ScriptedTable.cs" />
+    <Compile Include="Generator\ScriptedView.cs" />
+    <Compile Include="Generator\Settings\DbScriptFolderConfigurationSetting.cs" />
+    <Compile Include="Generator\Targets\DbScriptFolderManager.cs" />
+    <Compile Include="Generator\Targets\DbScriptOutputFolderPipeline.cs" />
+    <Compile Include="Generator\Settings\IDbScriptFolderConfigurationSetting.cs" />
+    <Compile Include="Generator\Targets\DbObjectStreamWriterAdapter.cs" />
+    <Compile Include="Generator\Targets\IDbObjectStreamWriterAdapter.cs" />
+    <Compile Include="Generator\Targets\IDbScriptFolderManager.cs" />
+    <Compile Include="Generator\Targets\IDbScriptObjectIDbObjectStreamWriterAdapterMapper.cs" />
+    <Compile Include="Generator\Targets\IDbScriptOutputPipeline.cs" />
+    <Compile Include="Generator\VelocityFileGenerator.cs" />
+    <Compile Include="Generator\VelocityFileTransformer.cs" />
+    <Compile Include="Generator\Vs2008SolutionGenerator.cs" />
+    <Compile Include="IScriptLogger.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="ISpecification.cs" />
+    <Compile Include="Provider\DbScriptObjectUpdate.cs" />
+    <Compile Include="Provider\IDatabase.cs" />
+    <Compile Include="Provider\IDbScriptObject.cs" />
+    <Compile Include="Provider\IDbScriptObjectUpdate.cs" />
+    <Compile Include="Provider\IDbScriptProvider.cs" />
+    <Compile Include="IMapper.cs" />
+    <Compile Include="Provider\IDbScriptProviderFactory.cs" />
+    <Compile Include="Provider\MsSql\Adapters\BaselineScriptingOptionsAdapter.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlConnectionSettings.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlDatabase.cs" />
+    <Compile Include="Provider\MsSql\Adapters\IMsSqlDatabaseConnectionAdapter.cs" />
+    <Compile Include="Provider\IRepository.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlStatementsTransformer.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IMsSqlFunctionStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IMsSqlObjectStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IMsSqlStoredProcStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IMsSqlTableStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IMsSqlViewStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IStoredProcedureMsSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\ITableMsSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IUserDefinedFunctionSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IViewMsSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\MsSqlBasicConnectionSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Provider\MsSql\MsSqlConnectionSettingsBase.cs" />
+    <Compile Include="Provider\MsSql\MsSqlCredentialMethod.cs" />
+    <Compile Include="Provider\MsSql\MsSqlDatabase.cs" />
+    <Compile Include="Provider\MsSql\Adapters\MsSqlDatabaseConnectionAdapter.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlUserFunction.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlObject.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlScriptProvider.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlStoredProc.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlTable.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlView.cs" />
+    <Compile Include="Provider\MsSql\Mappers\MsSqlFunctionStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\MsSqlIntegratedConnectionSettings.cs" />
+    <Compile Include="Provider\MsSql\MsSqlServerRegistry.cs" />
+    <Compile Include="Provider\MsSql\MsSqlStatementsTransformer.cs" />
+    <Compile Include="Provider\MsSql\MsSqlStoredProc.cs" />
+    <Compile Include="Provider\MsSql\MsSqlScriptProvider.cs" />
+    <Compile Include="Provider\MsSql\Mappers\MsSqlStoredProcStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\MsSqlTable.cs" />
+    <Compile Include="Provider\MsSql\Mappers\MsSqlTableStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\MsSqlUserDefinedFunction.cs" />
+    <Compile Include="Provider\MsSql\MsSqlView.cs" />
+    <Compile Include="Provider\MsSql\Mappers\MsSqlViewStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\StoredProcedureIDbScriptObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\TableMsSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\UserDefinedFunctionSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\ViewMsSqlObjectMapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Provider\MsSql\MsSqlProvider Diagram.cd" />
+    <None Include="Resources\Templates\staging.properties.xml.vm" />
+    <Content Include="Resources\Templates\01_CreateSandbox.sql.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\02_SetupExternalDependencies.sql.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\03_DefineSynonyms.sql.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\04_BuildShell.sql.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\explore.bat.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\sql.bat.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\developer.properties.xml.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\stub.build.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\stub.core.build.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\VS2008\open.bat.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\build.bat.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\setupdb.bat.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\VS2008\stub.dbp.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Templates\VS2008\stub.sln.vm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

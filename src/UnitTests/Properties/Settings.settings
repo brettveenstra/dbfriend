@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DbFriend.Testing.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="server" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">localhost</Value>
+    </Setting>
+    <Setting Name="db" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">dbFriend_IntegrationTest</Value>
+    </Setting>
+    <Setting Name="userid" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">app_dbfriend</Value>
+    </Setting>
+    <Setting Name="pwd" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">hellodbfriend123</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

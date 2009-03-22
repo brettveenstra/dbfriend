@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<properties>
+	<property name="sql.tools.path" value="C:\program files\microsoft sql server\100\tools\binn\" />
+	<property name="sql.server.name" value="localhost"/>
+	<property name="sql.command.runner" value="osql.exe"/>
+	<property name="initial.catalog" value="${dbfriend-projectName}Sandbox"/>
+	<property name="sql.loginname" value="sandbox_${dbfriend-projectName}"/>
+	<property name="sql.password" value="p@ssw0rd!"/>
+	<property name="osql.connectionstring" value="-S ${sql.server.name} -E "/>
+	<property name="osql.exe"  value="${sql.tools.path}\${sql.command.runner}" />
+	<property name="config.connectionstring" value="data source=${sql.server.name};Integrated Security=SSPI;Initial Catalog=${initial.catalog}"/>
+	<property name="database.provider" value="System.Data.SqlClient" />
+	<property name="dbgenerator.connectionstring" value="Provider=SQLNCLI;${config.connectionstring}"/>
+</properties>

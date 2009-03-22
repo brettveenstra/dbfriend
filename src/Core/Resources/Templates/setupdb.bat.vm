@@ -1,0 +1,1 @@
+﻿@..\tools\nant\NAnt.exe -buildfile:${projectName}.build setup.db

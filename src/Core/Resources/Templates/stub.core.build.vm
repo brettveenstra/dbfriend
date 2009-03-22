@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="${projectName}.core">
+
+  <!-- directories -->
+  <property name="base.dir" value="${dbfriend-nantGetBaseDir}" />
+  <property name="build.dir" value="${base.dir}\build" />
+  <!-- directories -->
+
+  <fileset id="db.creation.templates">
+    <!--	TODO: CREATION TEMPLATES FOR STAGING		-->
+  </fileset>
+
+  <fileset id="db.sandbox.creation.templates">
+    <include name="${build.dir}\sandbox\01_CreateSandbox.sql" asis="true"/>
+    <include name="${build.dir}\sandbox\02_SetupExternalDependencies.sql" asis="true"/>
+    <include name="${build.dir}\sandbox\03_DefineSynonyms.sql" asis="true"/>
+    <include name="${build.dir}\sandbox\04_BuildShell.sql" asis="true"/>
+  </fileset>
+
+  <fileset id="db.creation.files">
+  </fileset>
+
+  <fileset id="db.load.files">
+    <!--	TODO: CREATE LOAD FILES IN PROPER ORDER		-->
+  </fileset>
+
+  <fileset id="staging.load.files">
+    <include name="${build.dir}\staging-setup\baseline-data.sql" asis="true" />
+  </fileset>
+
+  <target name="setup.db">
+    <foreach item="File" property="target">
+      <in>
+        <items refid="db.sandbox.creation.templates"/>
+      </in>
+      <do>
+        <call target="run.sql.file.nodb"/>
+      </do>
+    </foreach>
+
+    <foreach item="File" property="target">
+      <in>
+        <items refid="db.creation.templates"/>
+      </in>
+      <do>
+        <call target="run.sql.template"/>
+      </do>
+    </foreach>
+
+    <foreach item="File" property="target">
+      <in>
+        <items refid="db.creation.files"/>
+      </in>
+      <do>
+        <call target="run.sql.file"/>
+      </do>
+    </foreach>
+
+  </target>
+
+  <target name="insert.default.data.db">
+    <foreach item="File" property="target">
+      <in>
+        <items refid="db.load.files"/>
+      </in>
+      <do>
+        <call target="run.sql.file"/>
+      </do>
+    </foreach>
+  </target>
+
+  <target name="setup.staging.db" depends="setup.db">
+    <foreach item="File" property="target">
+      <in>
+        <items refid="staging.setup.files"/>
+      </in>
+      <do>
+        <call target="run.sql.file"/>
+      </do>
+    </foreach>
+
+    <foreach item="File" property="target">
+      <in>
+        <items refid="staging.setup.files"/>
+      </in>
+      <do>
+        <call target="run.sql.file"/>
+      </do>
+    </foreach>
+
+  </target>
+
+  <target name="insert.staging.data.db" depends="setup.staging.db">
+    <foreach item="File" property="target">
+      <in>
+        <items refid="staging.load.files"/>
+      </in>
+      <do>
+        <call target="run.sql.file"/>
+      </do>
+    </foreach>
+  </target>
+
+  <target name="run.sql.template" depends="expand.template.file,run.sql.file.nodb"/>
+
+  <target name="run.sql.file.nodb">
+    <echo message="Executing file [${target}] on Sandbox" />
+    <exec program="${osql.exe}"
+			  workingdir="${dbfriend-nantGetCurrentDirectory}"
+			  commandline='${osql.connectionstring} -n -b -i "${target}"' />
+  </target>
+
+  <target name="run.sql.file">
+    <echo message="Executing file [${target}] on Sandbox" />
+    <exec program="${osql.exe}"
+			  workingdir="${dbfriend-nantGetCurrentDirectory}"
+			  commandline='${osql.connectionstring} -n -d ${initial.catalog} -b -i "${target}"' />
+  </target>
+
+  <target name="expand.template.file">
+    <echo message="initial.catalog = ${initial.catalog}" />
+    <copy file="${target}.template" tofile="${target}" overwrite="true" verbose="${verboseoperations}">
+      <filterchain>
+        <replacetokens>
+          <token key="sql.server.name" value="${sql.server.name}" />
+          <token key="sql.loginname" value="${sql.loginname}" />
+          <token key="sql.password" value="${sql.password}" />
+          <token key="initial.catalog" value="${initial.catalog}" />
+          <token key="config.connectionstring" value="${config.connectionstring}"/>
+          <token key="dbgenerator.connectionstring" value="${dbgenerator.connectionstring}"/>
+        </replacetokens>
+      </filterchain>
+    </copy>
+  </target>
+
+</project>

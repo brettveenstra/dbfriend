@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DbFriend.Core.Provider.MsSql.MsSqlStoredProcRepository" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\MsSqlStoredProcRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DbFriend.Core.Provider.MsSql.MsSqlDatabaseAdapter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\MsSqlDatabaseAdapter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DbFriend.Core.Provider.MsSql.MsSqlDatabaseConnectionAdapter" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAACAAAAAAAAAAAIAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\MsSqlDatabaseConnectionAdapter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DbFriend.Core.Provider.MsSql.MsSqlDatabaseFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAABAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\MsSqlDatabaseFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DbFriend.Core.Provider.MsSql.MsSqlDbScriptProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\MsSqlDbScriptProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DbFriend.Core.Provider.MsSql.MsSqlObjectFactory" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\MsSqlObjectFactory.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DbFriend.Core.Provider.MsSql.MsSqlStoredProc" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAgAAAAAQAAAAAgAQAAAAAAAAAAAAAAAAgCAA=</HashCode>
+      <FileName>Provider\MsSql\MsSqlStoredProc.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="DbFriend.Core.Provider.MsSqlProvider" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAgAAAAgAAAQAMAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\MsSqlProvider.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlConnectionCredentials" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAgAAAAAAAAAIACAQAAAAABAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlConnectionCredentials.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlDatabaseAdapter" Collapsed="true">
+    <Position X="10.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlDatabaseAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlDatabaseConnectionAdapter" Collapsed="true">
+    <Position X="12.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlDatabaseConnectionAdapter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlDatabaseFactory" Collapsed="true">
+    <Position X="14.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlDatabaseFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlFunction" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlFunction.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlObject" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlObject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlObjectFactory" Collapsed="true">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlObjectFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlProvider" Collapsed="true">
+    <Position X="12.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAQAMAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlRepository&lt;T&gt;" Collapsed="true">
+    <Position X="1.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlStoredProc" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlStoredProc.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlStoredProcRepository" Collapsed="true">
+    <Position X="1.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlStoredProcRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlTable" Collapsed="true">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlTable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="DbFriend.Core.Provider.MsSql.IMsSqlView" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\IMsSqlView.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="DbFriend.Core.Provider.MsSql.MsSqlCredentialMethod" Collapsed="true">
+    <Position X="10.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Provider\MsSql\MsSqlCredentialMethod.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>
