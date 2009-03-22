@@ -1,0 +1,36 @@
+﻿# Microsoft Developer Studio Project File - Database Project
+Begin DataProject = "${projectName}DB"
+  MSDTVersion = "80"
+  DefDBRef = "${dbref}"
+  Begin DBRefFolder = "Database References"
+      Begin DBRefNode = "${dbref}"
+         ConnectStr = "${dbconnstring}"
+         Provider = "{91510608-8809-4020-8897-FBA057E22D54}"
+         Colorizer = 6
+      End
+  End
+  Begin Folder = "build"
+	  Begin Folder = "baseline"
+		Begin Folder = "SPs"
+	#foreach( $sp in $spList )
+			Script = "$sp.Name"
+	#end
+		End
+		Begin Folder = "Tables"
+	#foreach( $table in $tableList )
+			Script = "$table.Name"
+	#end
+		End
+		Begin Folder = "UDFs"
+	#foreach( $function in $functionList )
+			Script = "$function.Name"
+	#end
+		End
+		Begin Folder = "Views"
+	#foreach( $view in $viewList )
+			Script = "$view.Name"
+	#end
+		End
+	  End
+  End
+End

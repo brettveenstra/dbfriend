@@ -1,0 +1,4 @@
+@echo off
+REM for 'explorer' info, see http://support.microsoft.com/kb/152457
+explorer /select,"."
+cls

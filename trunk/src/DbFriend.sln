@@ -1,0 +1,56 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{57E745BA-2E44-4E3F-A8A5-88B63EAA38B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "UnitTests\Testing.csproj", "{C39C57C0-2383-4E8D-A141-551EE465F62F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0691ABF2-B3C7-43BF-9862-2D8D1299CE58}"
+	ProjectSection(SolutionItems) = preProject
+		..\DbFriend.build = ..\DbFriend.build
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbFriendShell", "DbFriendShell\DbFriendShell.csproj", "{1CAE0594-4F96-42CA-A53F-F62D06A4AD73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "db-setup", "db-setup", "{CBD61039-C3E1-4ED8-981F-A6B7499D19CB}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\db-setup\0000001.sql = ..\build\db-setup\0000001.sql
+		..\build\db-setup\0000002.sql = ..\build\db-setup\0000002.sql
+		..\build\db-setup\0000003.sql = ..\build\db-setup\0000003.sql
+		..\build\db-setup\0000004.sql = ..\build\db-setup\0000004.sql
+		..\build\db-setup\0000005.sql = ..\build\db-setup\0000005.sql
+		..\build\db-setup\CreateDB.sql = ..\build\db-setup\CreateDB.sql
+		..\build\db-setup\CreateUser.sql = ..\build\db-setup\CreateUser.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AutomatedDebug|Any CPU = AutomatedDebug|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57E745BA-2E44-4E3F-A8A5-88B63EAA38B1}.AutomatedDebug|Any CPU.ActiveCfg = AutomatedDebug|Any CPU
+		{57E745BA-2E44-4E3F-A8A5-88B63EAA38B1}.AutomatedDebug|Any CPU.Build.0 = AutomatedDebug|Any CPU
+		{57E745BA-2E44-4E3F-A8A5-88B63EAA38B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57E745BA-2E44-4E3F-A8A5-88B63EAA38B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57E745BA-2E44-4E3F-A8A5-88B63EAA38B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57E745BA-2E44-4E3F-A8A5-88B63EAA38B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C39C57C0-2383-4E8D-A141-551EE465F62F}.AutomatedDebug|Any CPU.ActiveCfg = AutomatedDebug|Any CPU
+		{C39C57C0-2383-4E8D-A141-551EE465F62F}.AutomatedDebug|Any CPU.Build.0 = AutomatedDebug|Any CPU
+		{C39C57C0-2383-4E8D-A141-551EE465F62F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C39C57C0-2383-4E8D-A141-551EE465F62F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C39C57C0-2383-4E8D-A141-551EE465F62F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CAE0594-4F96-42CA-A53F-F62D06A4AD73}.AutomatedDebug|Any CPU.ActiveCfg = AutomatedDebug|Any CPU
+		{1CAE0594-4F96-42CA-A53F-F62D06A4AD73}.AutomatedDebug|Any CPU.Build.0 = AutomatedDebug|Any CPU
+		{1CAE0594-4F96-42CA-A53F-F62D06A4AD73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CAE0594-4F96-42CA-A53F-F62D06A4AD73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CAE0594-4F96-42CA-A53F-F62D06A4AD73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CAE0594-4F96-42CA-A53F-F62D06A4AD73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CBD61039-C3E1-4ED8-981F-A6B7499D19CB} = {0691ABF2-B3C7-43BF-9862-2D8D1299CE58}
+	EndGlobalSection
+EndGlobal

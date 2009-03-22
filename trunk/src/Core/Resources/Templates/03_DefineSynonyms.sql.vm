@@ -1,0 +1,19 @@
+﻿USE [${projectName}Sandbox]
+GO
+
+/*
+
+*************************************************************
+TODO: INSERT system-specific SYNONYMs
+*************************************************************
+
+EXAMPLE:
+===============================
+CREATE SYNONYM [dbo].[syn_foobar] FOR ${projectName}Sandbox_External.dbo.t_foobar
+===============================
+
+*/
+
+
+
+

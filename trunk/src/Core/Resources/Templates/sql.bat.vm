@@ -1,0 +1,3 @@
+@echo off
+cls
+start /b "SQL Manager" "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\ssms.exe" -S localhost -d ${projectName}Sandbox -E

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="${projectName}" default="test">
+
+  <property name="verboseoperations" value="false"/>
+
+  
+  <include buildfile="${projectName}.core.build" />
+
+  <echo message="Loading developer.properties.xml" />
+  <include buildfile="developer.properties.xml" />
+
+</project>

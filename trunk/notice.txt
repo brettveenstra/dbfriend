@@ -1,0 +1,29 @@
+
+	DbFriend
+	Copyright 2009 Brett Veenstra
+	
+
+	
+	
+	This software contains code derived from the TreeSurgeon project,
+	which is open source software, written and copyright by Bill Simser, 
+	Mike Roberts & ThoughtWorks.  The original software is available from
+		http://treesurgeon.codeplex.com
+	
+	Template support is provided by the NVelocity project, which is open
+	source software, available from
+		http://nvelocity.sourceforge.net
+
+	Dependency injection support is provided by StructureMap, which is open
+	source software, available from
+		http://structuremap.sourceforge.net
+
+	Automated testing support is provided by the Gallio & NAnt projects, 
+	which are open source software, available from
+		http://www.gallio.org
+		http://ncover.sourceforge.net
+
+	Automated build support is provided by the NAnt project, which is open
+	source software, available from
+		http://nant.sourceforge.net
+	

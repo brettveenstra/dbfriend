@@ -1,0 +1,22 @@
+﻿USE ${projectName}Sandbox
+GO
+
+/*
+
+*************************************************************
+TODO: INSERT DELTA script below
+*************************************************************
+
+For a good SQL DELTA tool, check:
+- Red Gate SQL Compare (http://redgate.com)
+
+
+
+
+
+
+
+** BE SURE TO LEAVE OUT PRODUCTION-ORIENTED SYNONYMS **
+
+*/
+
