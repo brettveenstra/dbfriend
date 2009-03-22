@@ -4,7 +4,7 @@
 
   * v1.3 Release
 	  * Cross-database are identified during scripting
-	  * !DBScripts no longer used
+	  * {{{DBScripts}}} no longer used
 	  * Console supported for comparisons against production
 	  * Centralized Error reporting
   * v2.x Release - Auto-Generate {{{04_CreateSandbox.sql.template}}} using full Dependency tracing
