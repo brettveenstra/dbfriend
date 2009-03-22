@@ -1,0 +1,21 @@
+#summary What we're planning
+
+
+
+  * v1.3 Release
+	  * Cross-database are identified during scripting
+	  * !DBScripts no longer used
+	  * Console supported for comparisons against production
+	  * Centralized Error reporting
+  * v2.x Release - Auto-Generate {{{04_CreateSandbox.sql.template}}} using full Dependency tracing
+	  * Linked Servers automatically defined
+	  * Synonyms setup automatically to {{{_External}}} DB
+	  * Supports Visual Studio 2005
+	  * Supports MS SQL 2005 clients
+	  * Unit Test Generation (e.g. T.S.T
+	  * Auto generate fake data
+  * v3.0 Release - Deep Dependency support
+	  * Pick Stored Proc that you want to work on and !DbFriend auto generates necessary objects the Stored Proc touches
+	  * Script Jobs for staging based on Production
+			* Deep dependency tracing, cross servers
+			* Sets up SYNONYMS that can either point to production or use {{{_External}}} database
