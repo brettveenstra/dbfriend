@@ -1,7 +1,11 @@
 #summary What we're planning
+#labels Phase-Requirements
 
 
-
+  * v1.2 Release
+    * Basic dependency support pre-builds NAnt scripts
+    * Scripts SQL-CLR assemblies
+    * Use SQL Templates for easy Staging setup
   * v1.3 Release
 	  * Cross-database are identified during scripting
 	  * {{{DBScripts}}} no longer used
