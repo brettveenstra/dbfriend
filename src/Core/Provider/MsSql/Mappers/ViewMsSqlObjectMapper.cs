@@ -6,15 +6,15 @@
 //   Defines the ViewMsSqlObjectMapper type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using Microsoft.SqlServer.Management.Smo;
+using DbFriend.Core.Provider.MsSql.Adapters;
 
 namespace DbFriend.Core.Provider.MsSql.Mappers
 {
     /// <summary>
     /// </summary>
-    public class ViewMsSqlObjectMapper : IViewMsSqlObjectMapper
+    public class ViewMsSqlObjectMapper : IViewAdapterMsSqlObjectMapper
     {
-        #region IViewMsSqlObjectMapper Members
+        #region IViewAdapterMsSqlObjectMapper Members
 
         /// <summary>
         /// </summary>
@@ -23,7 +23,7 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
         /// </param>
         /// <returns>
         /// </returns>
-        public IMsSqlObject MapFrom(View from)
+        public IMsSqlObject MapFrom(IViewAdapter from)
         {
             return new MsSqlView(from);
         }

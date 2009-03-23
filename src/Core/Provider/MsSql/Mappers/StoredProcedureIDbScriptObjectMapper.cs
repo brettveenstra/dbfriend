@@ -6,15 +6,24 @@
 //   Defines the StoredProcedureIDbScriptObjectMapper type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using Microsoft.SqlServer.Management.Smo;
+using DbFriend.Core.Provider.MsSql.Adapters;
 
 namespace DbFriend.Core.Provider.MsSql.Mappers
 {
     /// <summary>
     /// </summary>
-    public class StoredProcedureIDbScriptObjectMapper : IStoredProcedureMsSqlObjectMapper
+    public class StoredProcedureIDbScriptObjectMapper : IStoredProcedureAdapterMsSqlObjectMapper
     {
-        #region IStoredProcedureMsSqlObjectMapper Members
+        private IMsSqlStatementsTransformer transformer;
+        private IMsSqlDependencyRepository dependencyRepository;
+
+        #region IStoredProcedureAdapterMsSqlObjectMapper Members
+
+        public StoredProcedureIDbScriptObjectMapper(IMsSqlStatementsTransformer transformer, IMsSqlDependencyRepository dependencyRepository)
+        {
+            this.transformer = transformer;
+            this.dependencyRepository = dependencyRepository;
+        }
 
         /// <summary>
         /// </summary>
@@ -23,9 +32,9 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
         /// </param>
         /// <returns>
         /// </returns>
-        public IMsSqlObject MapFrom(StoredProcedure from)
+        public IMsSqlObject MapFrom(IStoredProcedureAdapter from)
         {
-            return new MsSqlStoredProc(from);
+            return new MsSqlStoredProc(from, transformer, dependencyRepository);
         }
 
         #endregion

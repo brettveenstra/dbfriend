@@ -6,15 +6,25 @@
 //   Defines the TableMsSqlObjectMapper type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using Microsoft.SqlServer.Management.Smo;
+using DbFriend.Core.Provider.MsSql.Adapters;
 
 namespace DbFriend.Core.Provider.MsSql.Mappers
 {
     /// <summary>
     /// </summary>
-    public class TableMsSqlObjectMapper : ITableMsSqlObjectMapper
+    public class TableMsSqlObjectMapper : ITableAdapterMsSqlObjectMapper
     {
-        #region ITableMsSqlObjectMapper Members
+        private IMsSqlDependencyRepository dependencyRepository;
+        private IMsSqlStatementsTransformer transformer;
+
+        public TableMsSqlObjectMapper(IMsSqlStatementsTransformer transformer,
+                                      IMsSqlDependencyRepository dependencyRepository)
+        {
+            this.transformer = transformer;
+            this.dependencyRepository = dependencyRepository;
+        }
+
+        #region ITableAdapterMsSqlObjectMapper Members
 
         /// <summary>
         /// </summary>
@@ -23,9 +33,9 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
         /// </param>
         /// <returns>
         /// </returns>
-        public IMsSqlObject MapFrom(Table from)
+        public IMsSqlObject MapFrom(ITableAdapter from)
         {
-            return new MsSqlTable(from);
+            return new MsSqlTable(from, transformer, dependencyRepository);
         }
 
         #endregion

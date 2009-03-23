@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QuickGraph.Data</name>
+    </assembly>
+    <members>
+        <member name="T:QuickGraph.Algorithms.Contracts.DummyAlgorithmContract">
+            <summary>
+            Ensures that System.Diagnostics.Contracts namespace exists 
+            </summary>
+        </member>
+    </members>
+</doc>

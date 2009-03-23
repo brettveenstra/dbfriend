@@ -7,6 +7,7 @@
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 using DbFriend.Core.Provider.MsSql.Adapters;
@@ -20,19 +21,10 @@ namespace DbFriend.Core.Provider.MsSql
     {
         /// <summary>
         /// </summary>
-        private readonly Table table;
+        private readonly ITableAdapter table;
 
         private readonly IMsSqlStatementsTransformer transformer;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MsSqlTable"/> class.
-        /// </summary>
-        /// <param name="table">
-        /// The table.
-        /// </param>
-        public MsSqlTable(Table table) : this(table, new MsSqlStatementsTransformer())
-        {
-        }
+        private IMsSqlDependencyRepository dependencyRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MsSqlTable"/> class.
@@ -41,10 +33,15 @@ namespace DbFriend.Core.Provider.MsSql
         /// The table.
         /// </param>
         /// <param name="transformer"></param>
-        public MsSqlTable(Table table, IMsSqlStatementsTransformer transformer)
+        /// <param name="dependencyRepository"></param>
+        public MsSqlTable(
+            ITableAdapter table,
+            IMsSqlStatementsTransformer transformer,
+            IMsSqlDependencyRepository dependencyRepository)
         {
             this.table = table;
             this.transformer = transformer;
+            this.dependencyRepository = dependencyRepository;
         }
 
         #region IMsSqlTable Members
@@ -60,6 +57,11 @@ namespace DbFriend.Core.Provider.MsSql
             get { return table.Name; }
         }
 
+        public string Type
+        {
+            get { return "table"; }
+        }
+
         /// <summary>
         /// Gets Owner.
         /// </summary>
@@ -69,6 +71,22 @@ namespace DbFriend.Core.Provider.MsSql
         public string Owner
         {
             get { return table.Owner; }
+        }
+
+        public IEnumerable<IMsSqlObject> Dependencies
+        {
+            get
+            {
+                foreach (IMsSqlObject sqlObject in dependencyRepository.GetDependencies(this))
+                {
+                    yield return sqlObject;
+                }
+            }
+        }
+
+        public string UrnString
+        {
+            get { return table.Urn; }
         }
 
         /// <summary>
@@ -109,7 +127,6 @@ namespace DbFriend.Core.Provider.MsSql
                 {
                     stringBuilder.Append(Environment.NewLine + Environment.NewLine);
                 }
-
             }
 
             if (stringBuilder.Length > 0)

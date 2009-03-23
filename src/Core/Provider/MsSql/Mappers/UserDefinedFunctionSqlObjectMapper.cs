@@ -6,15 +6,25 @@
 //   Defines the UserDefinedFunctionSqlObjectMapper type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using Microsoft.SqlServer.Management.Smo;
+using DbFriend.Core.Provider.MsSql.Adapters;
 
 namespace DbFriend.Core.Provider.MsSql.Mappers
 {
     /// <summary>
     /// </summary>
-    public class UserDefinedFunctionSqlObjectMapper : IUserDefinedFunctionSqlObjectMapper
+    public class UserDefinedFunctionSqlObjectMapper : IUserDefinedFunctionAdapterSqlObjectMapper
     {
-        #region IUserDefinedFunctionSqlObjectMapper Members
+        private IMsSqlDependencyRepository dependencyRepository;
+        private IMsSqlStatementsTransformer transformer;
+
+        public UserDefinedFunctionSqlObjectMapper(IMsSqlStatementsTransformer transformer,
+                                                  IMsSqlDependencyRepository dependencyRepository)
+        {
+            this.transformer = transformer;
+            this.dependencyRepository = dependencyRepository;
+        }
+
+        #region IUserDefinedFunctionAdapterSqlObjectMapper Members
 
         /// <summary>
         /// </summary>
@@ -23,9 +33,9 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
         /// </param>
         /// <returns>
         /// </returns>
-        public IMsSqlObject MapFrom(UserDefinedFunction from)
+        public IMsSqlObject MapFrom(IUserDefinedFunctionAdapter from)
         {
-            return new MsSqlUserDefinedFunction(from);
+            return new MsSqlUserDefinedFunction(from, transformer, dependencyRepository);
         }
 
         #endregion

@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="DbFriend" default="test" xmlns="http://nant.sf.net/schemas/nant.xsd">
+<project name="DbFriend" default="unittest" xmlns="http://nant.sf.net/schemas/nant.xsd">
 
   <property name="nant.settings.currentframework" value="net-3.5" />
   <property name="SetupdbConfig.connectionstring" value="-E -S localhost"/>
@@ -39,18 +39,29 @@
 		</msbuild>
 	</target>
 
-	<target name="test" depends="compile, run-unit-tests" 
+	<target name="unittest" depends="compile, run-unit-tests" 
+		description="Compile and Run UNIT Tests" />
+
+	<target name="test" depends="compile, run-tests" 
 		description="Compile and Run Tests" />
 		
 	<target name="full" depends="clean, test, dist"	description="Compiles, tests, and produces distributions" />
 
 	<!-- Internal targets -->
-	<target name="run-unit-tests" depends="setup.integration.db">
-    <property name="test-runner.exe.args" value='/wd:. /rd:${build.dir}\test-reports /rt:XML /rnf:Coverage /r:NCover /rp:NCoverArguments="/eas Gallio" "DbFriend.Testing.dll"' />
-    <echo message="Working dir: [${build.dir.drop}\UnitTests]" />
+	<target name="run-unit-tests">
+    <property name="test-runner.exe.args" value='/wd:. /rd:${build.dir}\test-reports /rt:XHTML "DbFriend.Testing.Unit.dll"' />
     <echo message="Args: [${test-runner.exe.args}]" />
     <mkdir dir="${build.dir}\test-reports" />
-		<exec program="${test-runner.exe}" workingdir="${build.dir.drop}\UnitTests">
+		<exec program="${test-runner.exe}" workingdir="${build.dir.drop}\Testing.Unit">
+      <arg line="${test-runner.exe.args}"/>
+    </exec>
+	</target>
+	
+	<target name="run-tests" depends="setup.integration.db">
+    <property name="test-runner.exe.args" value='/wd:. /rd:${build.dir}\test-reports /rt:XML /rnf:Coverage /r:NCover /rp:NCoverArguments="/eas Gallio" "DbFriend.Testing.Unit.dll" "DbFriend.Testing.Integration.dll"' />
+    <echo message="Args: [${test-runner.exe.args}]" />
+    <mkdir dir="${build.dir}\test-reports" />
+		<exec program="${test-runner.exe}" workingdir="${build.dir.drop}\Testing.Integration">
       <arg line="${test-runner.exe.args}"/>
     </exec>
 	</target>
