@@ -104,6 +104,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\nvelocity\NVelocity.dll</HintPath>
     </Reference>
+    <Reference Include="QuickGraph, Version=3.2.40228.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\quickgraph\QuickGraph.dll</HintPath>
+    </Reference>
     <Reference Include="StructureMap, Version=2.5.3.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\StructureMap\StructureMap.dll</HintPath>
@@ -151,6 +155,7 @@
     <Compile Include="Generator\VelocityFileGenerator.cs" />
     <Compile Include="Generator\VelocityFileTransformer.cs" />
     <Compile Include="Generator\Vs2008SolutionGenerator.cs" />
+    <Compile Include="Graph\IDependencyGraph.cs" />
     <Compile Include="IScriptLogger.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ISpecification.cs" />
@@ -162,6 +167,24 @@
     <Compile Include="IMapper.cs" />
     <Compile Include="Provider\IDbScriptProviderFactory.cs" />
     <Compile Include="Provider\MsSql\Adapters\BaselineScriptingOptionsAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\DatabaseWrapper.cs" />
+    <Compile Include="Provider\MsSql\Adapters\DependencyTreeNodeAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\DependencyWalkerAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\IDatabaseWrapper.cs" />
+    <Compile Include="Provider\MsSql\Adapters\IDependencyTreeNodeAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\IDependencyWalkerAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\ISqlSmoObjectAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\IStoredProcedureAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\ITableAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\IUserDefinedFunctionAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\IViewAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\StoredProcedureAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\TableAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\UserDefinedFunctionAdapter.cs" />
+    <Compile Include="Provider\MsSql\Adapters\ViewAdapter.cs" />
+    <Compile Include="Provider\MsSql\DependencyTreeNodeMsSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlDependencyRepository.cs" />
+    <Compile Include="Provider\MsSql\IDependencyTreeNodeAdapterMsSqlObjectMapper.cs" />
     <Compile Include="Provider\MsSql\IMsSqlConnectionSettings.cs" />
     <Compile Include="Provider\MsSql\IMsSqlDatabase.cs" />
     <Compile Include="Provider\MsSql\Adapters\IMsSqlDatabaseConnectionAdapter.cs" />
@@ -172,10 +195,10 @@
     <Compile Include="Provider\MsSql\Mappers\IMsSqlStoredProcStreamWriterAdapterMapper.cs" />
     <Compile Include="Provider\MsSql\Mappers\IMsSqlTableStreamWriterAdapterMapper.cs" />
     <Compile Include="Provider\MsSql\Mappers\IMsSqlViewStreamWriterAdapterMapper.cs" />
-    <Compile Include="Provider\MsSql\Mappers\IStoredProcedureMsSqlObjectMapper.cs" />
-    <Compile Include="Provider\MsSql\Mappers\ITableMsSqlObjectMapper.cs" />
-    <Compile Include="Provider\MsSql\Mappers\IUserDefinedFunctionSqlObjectMapper.cs" />
-    <Compile Include="Provider\MsSql\Mappers\IViewMsSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IStoredProcedureAdapterMsSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\ITableAdapterMsSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IUserDefinedFunctionAdapterSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\Mappers\IViewAdapterMsSqlObjectMapper.cs" />
     <Compile Include="Provider\MsSql\MsSqlBasicConnectionSettings.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -190,6 +213,7 @@
     <Compile Include="Provider\MsSql\IMsSqlTable.cs" />
     <Compile Include="Provider\MsSql\IMsSqlView.cs" />
     <Compile Include="Provider\MsSql\Mappers\MsSqlFunctionStreamWriterAdapterMapper.cs" />
+    <Compile Include="Provider\MsSql\MsSqlDependencyRepository.cs" />
     <Compile Include="Provider\MsSql\MsSqlIntegratedConnectionSettings.cs" />
     <Compile Include="Provider\MsSql\MsSqlServerRegistry.cs" />
     <Compile Include="Provider\MsSql\MsSqlStatementsTransformer.cs" />

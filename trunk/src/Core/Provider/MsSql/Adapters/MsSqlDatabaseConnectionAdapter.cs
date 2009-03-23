@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using DbFriend.Core.Provider.MsSql.Mappers;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
+using StructureMap;
+using StructureMap.Pipeline;
 
 namespace DbFriend.Core.Provider.MsSql.Adapters
 {
@@ -18,9 +20,6 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
     /// </summary>
     public class MsSqlDatabaseConnectionAdapter : IMsSqlDatabaseConnectionAdapter
     {
-        /// <summary>
-        /// </summary>
-        private readonly IUserDefinedFunctionSqlObjectMapper functionMapper;
 
         /// <summary>
         /// </summary>
@@ -28,15 +27,19 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
 
         /// <summary>
         /// </summary>
-        private readonly IStoredProcedureMsSqlObjectMapper storedProcMapper;
+        private readonly IStoredProcedureAdapterMsSqlObjectMapper storedProcMapper;
 
         /// <summary>
         /// </summary>
-        private readonly ITableMsSqlObjectMapper tableMapper;
+        private readonly ITableAdapterMsSqlObjectMapper tableAdapterMapper;
 
         /// <summary>
         /// </summary>
-        private readonly IViewMsSqlObjectMapper viewMapper;
+        private readonly IViewAdapterMsSqlObjectMapper viewAdapterMapper;
+
+        /// <summary>
+        /// </summary>
+        private readonly IUserDefinedFunctionAdapterSqlObjectMapper functionAdapterMapper;
 
         /// <summary>
         /// </summary>
@@ -51,23 +54,23 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         /// <param name="storedProcMapper">
         /// The stored Proc Mapper.
         /// </param>
-        /// <param name="tableMapper">
+        /// <param name="tableAdapterMapper">
         /// </param>
-        /// <param name="viewMapper">
+        /// <param name="viewAdapterMapper">
         /// </param>
-        /// <param name="functionMapper">
+        /// <param name="functionAdapterMapper">
         /// </param>
         public MsSqlDatabaseConnectionAdapter(
                 IMsSqlConnectionSettings settings,
-                IStoredProcedureMsSqlObjectMapper storedProcMapper,
-                ITableMsSqlObjectMapper tableMapper,
-                IViewMsSqlObjectMapper viewMapper,
-                IUserDefinedFunctionSqlObjectMapper functionMapper)
+                IStoredProcedureAdapterMsSqlObjectMapper storedProcMapper,
+                ITableAdapterMsSqlObjectMapper tableAdapterMapper,
+                IViewAdapterMsSqlObjectMapper viewAdapterMapper,
+                IUserDefinedFunctionAdapterSqlObjectMapper functionAdapterMapper)
         {
             this.settings = settings;
-            this.functionMapper = functionMapper;
-            this.viewMapper = viewMapper;
-            this.tableMapper = tableMapper;
+            this.functionAdapterMapper = functionAdapterMapper;
+            this.viewAdapterMapper = viewAdapterMapper;
+            this.tableAdapterMapper = tableAdapterMapper;
             this.storedProcMapper = storedProcMapper;
         }
 
@@ -104,7 +107,7 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
             {
                 MakeSureConnectionIsOpen();
 
-                foreach (StoredProcedure storedProcedure in GetDatabase().StoredProcedures)
+                foreach (IStoredProcedureAdapter storedProcedure in GetDatabase().StoredProcedures)
                 {
                     if (storedProcedure.IsSystemObject == false)
                     {
@@ -126,11 +129,11 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
             {
                 MakeSureConnectionIsOpen();
 
-                foreach (Table table in GetDatabase().Tables)
+                foreach (ITableAdapter table in GetDatabase().Tables)
                 {
                     if (table.IsSystemObject == false)
                     {
-                        yield return tableMapper.MapFrom(table);
+                        yield return tableAdapterMapper.MapFrom(table);
                     }
                 }
             }
@@ -148,11 +151,11 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
             {
                 MakeSureConnectionIsOpen();
 
-                foreach (View view in GetDatabase().Views)
+                foreach (IViewAdapter view in GetDatabase().Views)
                 {
                     if (view.IsSystemObject == false)
                     {
-                        yield return viewMapper.MapFrom(view);
+                        yield return viewAdapterMapper.MapFrom(view);
                     }
                 }
             }
@@ -170,11 +173,11 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
             {
                 MakeSureConnectionIsOpen();
 
-                foreach (UserDefinedFunction userDefinedFunction in GetDatabase().UserDefinedFunctions)
+                foreach (IUserDefinedFunctionAdapter userDefinedFunction in GetDatabase().UserDefinedFunctions)
                 {
                     if (userDefinedFunction.IsSystemObject == false)
                     {
-                        yield return functionMapper.MapFrom(userDefinedFunction);
+                        yield return functionAdapterMapper.MapFrom(userDefinedFunction);
                     }
                 }
             }
@@ -268,17 +271,21 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         /// </summary>
         /// <returns>
         /// </returns>
-        private Database GetDatabase()
+        private IDatabaseWrapper GetDatabase()
         {
             Server server = new Server(serverConnection);
 
             OptimizeSmoOperationsWithDefaultInitiFields(server);
 
-            if (server.Databases[settings.DatabaseName] == null)
+            Database database = server.Databases[settings.DatabaseName];
+            if (database == null)
             {
                 throw new ArgumentOutOfRangeException(string.Format("Database does not exist {0}.{1}", serverConnection.ServerInstance, settings.DatabaseName));
             }
-            return server.Databases[settings.DatabaseName];
+
+            IDatabaseWrapper databaseWrapper = new DatabaseWrapper(database);
+            return databaseWrapper;
+
         }
     }
 }

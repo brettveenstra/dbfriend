@@ -7,6 +7,8 @@
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace DbFriend.Core.Provider.MsSql
 {
     /// <summary>
@@ -20,5 +22,8 @@ namespace DbFriend.Core.Provider.MsSql
         /// The owner.
         /// </value>
         string Owner { get; }
+
+        IEnumerable<IMsSqlObject> Dependencies { get; }
+        string UrnString { get; }
     }
 }

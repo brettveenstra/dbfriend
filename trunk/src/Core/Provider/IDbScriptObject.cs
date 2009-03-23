@@ -22,6 +22,11 @@ namespace DbFriend.Core.Provider
         string Name { get; }
 
         /// <summary>
+        /// Gets Type of Object.
+        /// </summary>
+        string Type { get; }
+
+        /// <summary>
         /// </summary>
         /// <returns>
         /// </returns>

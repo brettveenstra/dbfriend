@@ -8,6 +8,7 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 using DbFriend.Core.Provider.MsSql.Adapters;
@@ -21,7 +22,7 @@ namespace DbFriend.Core.Provider.MsSql
     {
         /// <summary>
         /// </summary>
-        private readonly View view;
+        private readonly IViewAdapter view;
 
         private IMsSqlStatementsTransformer transformer;
 
@@ -31,7 +32,7 @@ namespace DbFriend.Core.Provider.MsSql
         /// <param name="view">
         /// The view.
         /// </param>
-        public MsSqlView(View view) : this(view, new MsSqlStatementsTransformer())
+        public MsSqlView(IViewAdapter view) : this(view, new MsSqlStatementsTransformer())
         {
         }
 
@@ -42,7 +43,7 @@ namespace DbFriend.Core.Provider.MsSql
         /// The view.
         /// </param>
         /// <param name="statementTransformer"></param>
-        public MsSqlView(View view, IMsSqlStatementsTransformer statementTransformer)
+        public MsSqlView(IViewAdapter view, IMsSqlStatementsTransformer statementTransformer)
         {
             this.view = view;
             this.transformer = statementTransformer;
@@ -61,6 +62,11 @@ namespace DbFriend.Core.Provider.MsSql
             get { return view.Name; }
         }
 
+        public string Type
+        {
+            get { return "view"; }
+        }
+
         /// <summary>
         /// Gets Owner.
         /// </summary>
@@ -70,6 +76,16 @@ namespace DbFriend.Core.Provider.MsSql
         public string Owner
         {
             get { return view.Owner; }
+        }
+
+        public IEnumerable<IMsSqlObject> Dependencies
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string UrnString
+        {
+            get { return view.Urn; }
         }
 
         /// <summary>

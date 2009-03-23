@@ -7,6 +7,7 @@
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 using DbFriend.Core.Provider.MsSql.Adapters;
@@ -18,9 +19,11 @@ namespace DbFriend.Core.Provider.MsSql
     /// </summary>
     public class MsSqlStoredProc : IMsSqlStoredProc
     {
+        private readonly IMsSqlDependencyRepository dependencyRepository;
+
         /// <summary>
         /// </summary>
-        private readonly StoredProcedure storedProcedure;
+        private readonly IStoredProcedureAdapter storedProcedure;
 
         private IMsSqlStatementsTransformer statementTransformer;
 
@@ -30,21 +33,14 @@ namespace DbFriend.Core.Provider.MsSql
         /// <param name="storedProcedure">
         /// The stored procedure.
         /// </param>
-        public MsSqlStoredProc(StoredProcedure storedProcedure) : this(storedProcedure, new MsSqlStatementsTransformer())
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="MsSqlStoredProc"/> class.
-        /// </summary>
-        /// <param name="storedProcedure">
-        /// The stored procedure.
-        /// </param>
         /// <param name="transformer"></param>
-        public MsSqlStoredProc(StoredProcedure storedProcedure, IMsSqlStatementsTransformer transformer)
+        /// <param name="dependencyRepository"></param>
+        public MsSqlStoredProc(IStoredProcedureAdapter storedProcedure, IMsSqlStatementsTransformer transformer,
+                               IMsSqlDependencyRepository dependencyRepository)
         {
             this.storedProcedure = storedProcedure;
             statementTransformer = transformer;
+            this.dependencyRepository = dependencyRepository;
         }
 
         #region IMsSqlStoredProc Members
@@ -60,6 +56,11 @@ namespace DbFriend.Core.Provider.MsSql
             get { return storedProcedure.Name; }
         }
 
+        public string Type
+        {
+            get { return "storedprocedure"; }
+        }
+
         /// <summary>
         /// Gets Owner.
         /// </summary>
@@ -69,6 +70,22 @@ namespace DbFriend.Core.Provider.MsSql
         public string Owner
         {
             get { return storedProcedure.Owner; }
+        }
+
+        public IEnumerable<IMsSqlObject> Dependencies
+        {
+            get
+            {
+                foreach (IMsSqlObject sqlObject in dependencyRepository.GetDependencies(this))
+                {
+                    yield return sqlObject;
+                }
+            }
+        }
+
+        public string UrnString
+        {
+            get { return storedProcedure.Urn; }
         }
 
         /// <summary>

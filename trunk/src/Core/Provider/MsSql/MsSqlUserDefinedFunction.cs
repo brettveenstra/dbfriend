@@ -7,6 +7,7 @@
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Text;
 using DbFriend.Core.Provider.MsSql.Adapters;
@@ -18,21 +19,14 @@ namespace DbFriend.Core.Provider.MsSql
     /// </summary>
     public class MsSqlUserDefinedFunction : IMsSqlObject
     {
-        /// <summary>
-        /// </summary>
-        private readonly UserDefinedFunction userDefinedFunction;
-
         private readonly IMsSqlStatementsTransformer transformer;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MsSqlUserDefinedFunction"/> class.
         /// </summary>
-        /// <param name="userDefinedFunction">
-        /// The user defined function.
-        /// </param>
-        public MsSqlUserDefinedFunction(UserDefinedFunction userDefinedFunction) : this(userDefinedFunction, new MsSqlStatementsTransformer())
-        {
-        }
+        private readonly IUserDefinedFunctionAdapter userDefinedFunction;
+
+        private IMsSqlDependencyRepository msSqlDependencyRepository;
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MsSqlUserDefinedFunction"/> class.
@@ -41,10 +35,15 @@ namespace DbFriend.Core.Provider.MsSql
         /// The user defined function.
         /// </param>
         /// <param name="transformer"></param>
-        public MsSqlUserDefinedFunction(UserDefinedFunction userDefinedFunction, IMsSqlStatementsTransformer transformer)
+        /// <param name="msSqlDependencyRepository"></param>
+        public MsSqlUserDefinedFunction(
+            IUserDefinedFunctionAdapter userDefinedFunction,
+            IMsSqlStatementsTransformer transformer,
+            IMsSqlDependencyRepository msSqlDependencyRepository)
         {
             this.userDefinedFunction = userDefinedFunction;
             this.transformer = transformer;
+            this.msSqlDependencyRepository = msSqlDependencyRepository;
         }
 
         #region IMsSqlObject Members
@@ -60,6 +59,11 @@ namespace DbFriend.Core.Provider.MsSql
             get { return userDefinedFunction.Name; }
         }
 
+        public string Type
+        {
+            get { return "function"; }
+        }
+
         /// <summary>
         /// Gets Owner.
         /// </summary>
@@ -69,6 +73,22 @@ namespace DbFriend.Core.Provider.MsSql
         public string Owner
         {
             get { return userDefinedFunction.Owner; }
+        }
+
+        public IEnumerable<IMsSqlObject> Dependencies
+        {
+            get
+            {
+                foreach (IMsSqlObject sqlObject in msSqlDependencyRepository.GetDependencies(this))
+                {
+                    yield return sqlObject;
+                }
+            }
+        }
+
+        public string UrnString
+        {
+            get { return userDefinedFunction.Urn; }
         }
 
         /// <summary>
