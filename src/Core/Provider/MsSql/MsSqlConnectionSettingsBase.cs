@@ -1,22 +1,37 @@
+// --------------------------------------------------------------------------------------------------------------------- 
+// <copyright file="MsSqlConnectionSettingsBase.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Defines the MsSqlConnectionSettingsBase type.
+// </summary>
+// ---------------------------------------------------------------------------------------------------------------------
+
 namespace DbFriend.Core.Provider.MsSql
 {
+    /// <summary>
+    /// </summary>
     public abstract class MsSqlConnectionSettingsBase : IMsSqlConnectionSettings
     {
         /// <summary>
         /// </summary>
-        protected string databaseName;
+        private string databaseName;
 
         /// <summary>
         /// </summary>
-        protected MsSqlCredentialMethod method;
-
-        protected string password;
+        private MsSqlCredentialMethod method = MsSqlCredentialMethod.Integrated;
 
         /// <summary>
         /// </summary>
-        protected string serverInstance;
+        private string password;
 
-        protected string userName;
+        /// <summary>
+        /// </summary>
+        private string serverInstance;
+
+        /// <summary>
+        /// </summary>
+        private string userName;
 
         #region IMsSqlConnectionSettings Members
 
@@ -36,7 +51,15 @@ namespace DbFriend.Core.Provider.MsSql
         /// </value>
         public string ServerInstance
         {
-            get { return serverInstance; }
+            get
+            {
+                return this.serverInstance;
+            }
+
+            protected set
+            {
+                this.serverInstance = value;
+            }
         }
 
         /// <summary>
@@ -49,13 +72,17 @@ namespace DbFriend.Core.Provider.MsSql
         {
             get
             {
-                if (method == MsSqlCredentialMethod.SqlUser)
+                if (this.method == MsSqlCredentialMethod.SqlUser)
                 {
-                    return string.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", serverInstance,
-                                         databaseName, userName, Password);
+                    return string.Format(
+                            "Data Source={0};Initial Catalog={1};User Id={2};Password={3}",
+                            this.serverInstance,
+                            this.databaseName,
+                            this.userName,
+                            this.Password);
                 }
-                return "Data Source=" + serverInstance + ";Initial Catalog=" + databaseName +
-                       ";Integrated Security=True;";
+
+                return "Data Source=" + this.serverInstance + ";Initial Catalog=" + this.databaseName + ";Integrated Security=True;";
             }
         }
 
@@ -67,7 +94,15 @@ namespace DbFriend.Core.Provider.MsSql
         /// </value>
         public string UserName
         {
-            get { return userName; }
+            get
+            {
+                return this.userName;
+            }
+
+            protected set
+            {
+                this.userName = value;
+            }
         }
 
         /// <summary>
@@ -78,7 +113,15 @@ namespace DbFriend.Core.Provider.MsSql
         /// </value>
         public string Password
         {
-            get { return password; }
+            get
+            {
+                return this.password;
+            }
+
+            protected set
+            {
+                this.password = value;
+            }
         }
 
         /// <summary>
@@ -89,7 +132,15 @@ namespace DbFriend.Core.Provider.MsSql
         /// </value>
         public string DatabaseName
         {
-            get { return databaseName; }
+            get
+            {
+                return this.databaseName;
+            }
+
+            protected set
+            {
+                this.databaseName = value;
+            }
         }
 
         #endregion

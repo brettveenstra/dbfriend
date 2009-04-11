@@ -1,9 +1,27 @@
-using System.Collections.Generic;
+// --------------------------------------------------------------------------------------------------------------------- 
+// <copyright file="IMsSqlDependencyRepository.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Defines the IMsSqlDependencyRepository type.
+// </summary>
+// ---------------------------------------------------------------------------------------------------------------------
 
 namespace DbFriend.Core.Provider.MsSql
 {
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// </summary>
     public interface IMsSqlDependencyRepository
     {
-        IEnumerable<IMsSqlObject> GetDependencies(IMsSqlObject msSqlObject);
+        /// <summary>
+        /// </summary>
+        /// <param name="mssqlObject">
+        /// The ms sql object.
+        /// </param>
+        /// <returns>
+        /// </returns>
+        IEnumerable<IMsSqlObject> GetDependencies(IMsSqlObject mssqlObject);
     }
 }

@@ -6,16 +6,19 @@
 //   Defines the DbScriptGeneratorTest type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using DbFriend.Core.Generator;
-using DbFriend.Core.Generator.Settings;
-using DbFriend.Core.Generator.Targets;
-using DbFriend.Core.Provider;
-using DbFriend.Testing.Utility;
-using MbUnit.Framework;
-using Rhino.Mocks;
-
 namespace DbFriend.Testing.Unit.Generator
 {
+    using DbFriend.Core.Generator;
+    using DbFriend.Core.Generator.Settings;
+    using DbFriend.Core.Generator.Targets;
+    using DbFriend.Core.Provider;
+
+    using MbUnit.Framework;
+
+    using Rhino.Mocks;
+
+    using Utility;
+
     /// <summary>
     /// </summary>
     public class DbScriptGeneratorTest : Specification<DbScriptGenerator>
@@ -25,27 +28,20 @@ namespace DbFriend.Testing.Unit.Generator
         [Test]
         public void ScriptDb_Top_Down()
         {
-            IDatabase connection = MockingContext.Get<IDatabase>();
-            IDbScriptOutputPipeline pipeline = MockingContext.Get<IDbScriptOutputPipeline>();
-            IDbScriptProvider provider = MockingContext.Get<IDbScriptProvider>();
-            IDbScriptFolderConfigurationSetting setting = MockingContext.Get<IDbScriptFolderConfigurationSetting>();
-            
-            provider.Expect(x => x.ForTheDatabase(connection))
-                .IgnoreArguments();
+            IDatabase connection = this.MockingContext.Get<IDatabase>();
+            IDbScriptOutputPipeline pipeline = this.MockingContext.Get<IDbScriptOutputPipeline>();
+            IDbScriptProvider provider = this.MockingContext.Get<IDbScriptProvider>();
+            IDbScriptFolderConfigurationSetting setting = this.MockingContext.Get<IDbScriptFolderConfigurationSetting>();
 
-            provider.Expect(x => x.ScriptUsing(pipeline))
-                .Return(provider)
-                .IgnoreArguments();
+            provider.Expect(x => x.ForTheDatabase(connection)).IgnoreArguments();
 
-            provider.Expect(x => x.NotifyingActionsWith(null))
-                .Return(provider)
-                .IgnoreArguments();
+            provider.Expect(x => x.ScriptUsing(pipeline)).Return(provider).IgnoreArguments();
 
-            provider.Expect(x => x.WithSetting(setting))
-                .Return(provider)
-                .IgnoreArguments();
-            
-            Sut.ScriptDb(null);
+            provider.Expect(x => x.NotifyingActionsWith(null)).Return(provider).IgnoreArguments();
+
+            provider.Expect(x => x.WithSetting(setting)).Return(provider).IgnoreArguments();
+
+            this.Sut.ScriptDb(null);
 
             provider.VerifyAllExpectations();
         }

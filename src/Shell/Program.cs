@@ -7,14 +7,19 @@
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Windows.Forms;
-using DbFriend.Core;
-using StructureMap;
-
-namespace DbFriendShell
+namespace DbFriend.Shell
 {
+    using System;
+    using System.Windows.Forms;
+
+    using DbFriend.Core;
+
+    using DbFriendShell;
+
+    using StructureMap;
+
     /// <summary>
+    /// Main entry ponit for Shell
     /// </summary>
     internal static class Program
     {

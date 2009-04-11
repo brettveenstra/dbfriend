@@ -13,7 +13,7 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
             Urn urn = new Urn(baseObject.UrnString);
 
             DependencyWalker dependencyWalker = new DependencyWalker();
-            DependencyTree dependencyTree = dependencyWalker.DiscoverDependencies(new[] {urn}, DependencyType.Children);
+            DependencyTree dependencyTree = dependencyWalker.DiscoverDependencies(new[] { urn }, DependencyType.Children);
             List<IDependencyTreeNodeAdapter> list = new List<IDependencyTreeNodeAdapter>();
             DependencyTreeNode firstChild = dependencyTree.FirstChild;
 

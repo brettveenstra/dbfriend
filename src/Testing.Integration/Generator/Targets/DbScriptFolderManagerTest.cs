@@ -6,13 +6,15 @@
 //   Defines the DbScriptFolderManagerTest type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using DbFriend.Core.Generator.Targets;
-using DbFriend.Core.Provider.MsSql;
-using MbUnit.Framework;
-using StructureMap;
-
 namespace DbFriend.Testing.Integration.Generator.Targets
 {
+    using DbFriend.Core.Generator.Targets;
+    using DbFriend.Core.Provider.MsSql;
+
+    using MbUnit.Framework;
+
+    using StructureMap;
+
     /// <summary>
     /// </summary>
     [TestFixture]
@@ -23,12 +25,12 @@ namespace DbFriend.Testing.Integration.Generator.Targets
         [SetUp]
         public void Setup()
         {
-            ObjectFactory.Initialize(x =>
-                                     {
-                                         x.AddRegistry(new IntegrationTestRegistry(MsSqlCredentialMethod.SqlUser));
-                                         x.ForRequestedType<IDbScriptFolderManager>().TheDefault.Is
-                                                 .OfConcreteType<DbScriptFolderManager>();
-                                     });
+            ObjectFactory.Initialize(
+                    x =>
+                    {
+                        x.AddRegistry(new IntegrationTestRegistry(MsSqlCredentialMethod.SqlUser));
+                        x.ForRequestedType<IDbScriptFolderManager>().TheDefault.Is.OfConcreteType<DbScriptFolderManager>();
+                    });
         }
 
         /// <summary>

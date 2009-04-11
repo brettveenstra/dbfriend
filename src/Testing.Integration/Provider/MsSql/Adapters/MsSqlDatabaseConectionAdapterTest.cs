@@ -6,13 +6,15 @@
 //   Defines the MsSqlDatabaseConectionAdapterTest type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using DbFriend.Core.Provider.MsSql;
-using DbFriend.Core.Provider.MsSql.Adapters;
-using MbUnit.Framework;
-using StructureMap;
-
-namespace DbFriend.Testing.Integration.Provider.MsSql
+namespace DbFriend.Testing.Integration.Provider.MsSql.Adapters
 {
+    using Core.Provider.MsSql;
+    using Core.Provider.MsSql.Adapters;
+
+    using MbUnit.Framework;
+
+    using StructureMap;
+
     /// <summary>
     /// </summary>
     [TestFixture]

@@ -6,27 +6,32 @@
 //   Defines the MsSqlUserDefinedFunction type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Text;
-using DbFriend.Core.Provider.MsSql.Adapters;
-using Microsoft.SqlServer.Management.Smo;
-
 namespace DbFriend.Core.Provider.MsSql
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Text;
+
+    using DbFriend.Core.Provider.MsSql.Adapters;
+
+    using Microsoft.SqlServer.Management.Smo;
+
     /// <summary>
     /// </summary>
     public class MsSqlUserDefinedFunction : IMsSqlObject
     {
+        /// <summary>
+        /// </summary>
         private readonly IMsSqlStatementsTransformer transformer;
 
         /// <summary>
         /// </summary>
         private readonly IUserDefinedFunctionAdapter userDefinedFunction;
 
-        private IMsSqlDependencyRepository msSqlDependencyRepository;
-
+        /// <summary>
+        /// </summary>
+        private IMsSqlDependencyRepository mssqlDependencyRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MsSqlUserDefinedFunction"/> class.
@@ -34,16 +39,18 @@ namespace DbFriend.Core.Provider.MsSql
         /// <param name="userDefinedFunction">
         /// The user defined function.
         /// </param>
-        /// <param name="transformer"></param>
-        /// <param name="msSqlDependencyRepository"></param>
+        /// <param name="transformer">
+        /// </param>
+        /// <param name="mssqlDependencyRepository">
+        /// </param>
         public MsSqlUserDefinedFunction(
-            IUserDefinedFunctionAdapter userDefinedFunction,
-            IMsSqlStatementsTransformer transformer,
-            IMsSqlDependencyRepository msSqlDependencyRepository)
+                IUserDefinedFunctionAdapter userDefinedFunction,
+                IMsSqlStatementsTransformer transformer,
+                IMsSqlDependencyRepository mssqlDependencyRepository)
         {
             this.userDefinedFunction = userDefinedFunction;
             this.transformer = transformer;
-            this.msSqlDependencyRepository = msSqlDependencyRepository;
+            this.mssqlDependencyRepository = mssqlDependencyRepository;
         }
 
         #region IMsSqlObject Members
@@ -56,12 +63,24 @@ namespace DbFriend.Core.Provider.MsSql
         /// </value>
         public string Name
         {
-            get { return userDefinedFunction.Name; }
+            get
+            {
+                return this.userDefinedFunction.Name;
+            }
         }
 
+        /// <summary>
+        /// Gets Type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
         public string Type
         {
-            get { return "function"; }
+            get
+            {
+                return "function";
+            }
         }
 
         /// <summary>
@@ -72,23 +91,41 @@ namespace DbFriend.Core.Provider.MsSql
         /// </value>
         public string Owner
         {
-            get { return userDefinedFunction.Owner; }
+            get
+            {
+                return this.userDefinedFunction.Owner;
+            }
         }
 
+        /// <summary>
+        /// Gets Dependencies.
+        /// </summary>
+        /// <value>
+        /// The dependencies.
+        /// </value>
         public IEnumerable<IMsSqlObject> Dependencies
         {
             get
             {
-                foreach (IMsSqlObject sqlObject in msSqlDependencyRepository.GetDependencies(this))
+                foreach (IMsSqlObject sqlObject in this.mssqlDependencyRepository.GetDependencies(this))
                 {
                     yield return sqlObject;
                 }
             }
         }
 
+        /// <summary>
+        /// Gets UrnString.
+        /// </summary>
+        /// <value>
+        /// The urn string.
+        /// </value>
         public string UrnString
         {
-            get { return userDefinedFunction.Urn; }
+            get
+            {
+                return this.userDefinedFunction.Urn;
+            }
         }
 
         /// <summary>
@@ -97,9 +134,9 @@ namespace DbFriend.Core.Provider.MsSql
         /// </returns>
         public string Script()
         {
-            string dropScript = ScriptDrop(new BaselineScriptingOptionsAdapter().Options);
+            string dropScript = this.ScriptDrop(new BaselineScriptingOptionsAdapter().Options);
 
-            string createScript = ScriptCreate(new BaselineScriptingOptionsAdapter().Options);
+            string createScript = this.ScriptCreate(new BaselineScriptingOptionsAdapter().Options);
 
             return dropScript + createScript;
         }
@@ -118,12 +155,12 @@ namespace DbFriend.Core.Provider.MsSql
             options.ScriptDrops = false;
             options.IncludeIfNotExists = false;
 
-            StringCollection lines = userDefinedFunction.Script(options);
+            StringCollection lines = this.userDefinedFunction.Script(options);
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (string line in lines)
             {
-                transformer.Process(line, stringBuilder);
+                this.transformer.Process(line, stringBuilder);
             }
 
             if (stringBuilder.Length > 0)
@@ -146,12 +183,12 @@ namespace DbFriend.Core.Provider.MsSql
             options.ScriptDrops = true;
             options.IncludeIfNotExists = true;
 
-            StringCollection lines = userDefinedFunction.Script(options);
+            StringCollection lines = this.userDefinedFunction.Script(options);
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (string line in lines)
             {
-                transformer.Process(line, stringBuilder);
+                this.transformer.Process(line, stringBuilder);
             }
 
             if (stringBuilder.Length > 0)

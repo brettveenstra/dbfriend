@@ -6,12 +6,13 @@
 //   Defines the IntegrationTestConnectionSettings type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System.Diagnostics;
-using DbFriend.Core.Provider.MsSql;
-using DbFriend.Testing.Integration.Properties;
-
 namespace DbFriend.Testing.Integration
 {
+    using System.Diagnostics;
+
+    using DbFriend.Core.Provider.MsSql;
+    using DbFriend.Testing.Integration.Properties;
+
     /// <summary>
     /// </summary>
     public class IntegrationTestConnectionSettings : MsSqlBasicConnectionSettings
@@ -19,15 +20,10 @@ namespace DbFriend.Testing.Integration
         /// <summary>
         /// Initializes a new instance of the <see cref="IntegrationTestConnectionSettings"/> class.
         /// </summary>
-        public IntegrationTestConnectionSettings()
-                : this(
-                        Settings.Default.server,
-                        Settings.Default.userid,
-                        Settings.Default.pwd,
-                        Settings.Default.db)
+        public IntegrationTestConnectionSettings() : this(Settings.Default.server, Settings.Default.userid, Settings.Default.pwd, Settings.Default.db)
         {
-            Debug.WriteLine(string.Format("ServerInstance: {0}", ServerInstance));
-            Debug.WriteLine(string.Format("Database: {0}", DatabaseName));
+            Debug.WriteLine(string.Format("ServerInstance: {0}", this.ServerInstance));
+            Debug.WriteLine(string.Format("Database: {0}", this.DatabaseName));
         }
 
         /// <summary>
@@ -45,11 +41,7 @@ namespace DbFriend.Testing.Integration
         /// <param name="databaseName">
         /// The database name.
         /// </param>
-        private IntegrationTestConnectionSettings(
-                string serverInstance,
-                string userName,
-                string password,
-                string databaseName)
+        private IntegrationTestConnectionSettings(string serverInstance, string userName, string password, string databaseName)
                 : base(serverInstance, userName, password, databaseName)
         {
         }

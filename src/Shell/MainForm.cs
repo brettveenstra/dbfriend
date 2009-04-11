@@ -6,15 +6,16 @@
 //   Defines the MainForm type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System;
-using System.IO;
-using System.Windows.Forms;
-using DbFriend.Core.Generator;
-using DbFriend.Core.Provider.MsSql;
-using DbFriend.Shell.Properties;
-
 namespace DbFriendShell
 {
+    using System;
+    using System.IO;
+    using System.Windows.Forms;
+
+    using DbFriend.Core.Generator;
+    using DbFriend.Core.Provider.MsSql;
+    using DbFriend.Shell.Properties;
+
     /// <summary>
     /// Main Form to show
     /// </summary>
@@ -25,7 +26,7 @@ namespace DbFriendShell
         /// </summary>
         public MainForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         /// <summary>
@@ -39,55 +40,47 @@ namespace DbFriendShell
         /// </param>
         private void ScriptDbButton_Click(object sender, EventArgs e)
         {
-            Cursor originalCursor = Cursor;
+            Cursor originalCursor = this.Cursor;
 
-            Cursor = Cursors.WaitCursor;
+            this.Cursor = Cursors.WaitCursor;
 
             string finalOutputPath = Path.Combine(
-                Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DbFriend"),
-                databaseNameTextBox.Text);
+                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "DbFriend"), this.databaseNameTextBox.Text);
 
-            statusTextBox.Text = string.Format("Generating to: {0}", finalOutputPath) + Environment.NewLine;
+            this.statusTextBox.Text = string.Format("Generating to: {0}", finalOutputPath) + Environment.NewLine;
             Application.DoEvents();
 
             MsSqlServerRegistry registry;
-            if (integratedSecurityCheckBox.Checked)
+            if (this.integratedSecurityCheckBox.Checked)
             {
-                registry = new MsSqlServerRegistry(
-                    serverNameTextBox.Text,
-                    databaseNameTextBox.Text);
+                registry = new MsSqlServerRegistry(this.serverNameTextBox.Text, this.databaseNameTextBox.Text);
             }
             else
             {
                 registry = new MsSqlServerRegistry(
-                    serverNameTextBox.Text,
-                    databaseNameTextBox.Text,
-                    userNameTextBox.Text,
-                    passwordTextBox.Text);
+                        this.serverNameTextBox.Text, this.databaseNameTextBox.Text, this.userNameTextBox.Text, this.passwordTextBox.Text);
             }
 
-            IDbFriendGenerator generator = new DbFriendGenerator(
-                registry,
-                new DbFriendGeneratorRegistry(finalOutputPath));
+            IDbFriendGenerator generator = new DbFriendGenerator(registry, new DbFriendGeneratorRegistry(finalOutputPath));
 
-            generator.Generate(update =>
-                                   {
-                                       statusTextBox.Text += update.UpdateMessage + Environment.NewLine;
+            generator.Generate(
+                    update =>
+                    {
+                        this.statusTextBox.Text += update.UpdateMessage + Environment.NewLine;
 
-                                       statusTextBox.Focus();
-                                       statusTextBox.SelectionStart = statusTextBox.Text.Length + 1;
-                                       statusTextBox.SelectionLength = 0;
-                                       statusTextBox.ScrollToCaret();
+                        this.statusTextBox.Focus();
+                        this.statusTextBox.SelectionStart = this.statusTextBox.Text.Length + 1;
+                        this.statusTextBox.SelectionLength = 0;
+                        this.statusTextBox.ScrollToCaret();
 
-                                       mainToolStripStatusLabel.Text = update.UpdateMessage;
+                        this.mainToolStripStatusLabel.Text = update.UpdateMessage;
 
-                                       Application.DoEvents();
-                                   });
+                        Application.DoEvents();
+                    });
 
-            mainToolStripStatusLabel.Text = "Finished";
+            this.mainToolStripStatusLabel.Text = "Finished";
 
-            Cursor = originalCursor;
+            this.Cursor = originalCursor;
 
             MessageBox.Show("All Done!");
         }
@@ -103,9 +96,9 @@ namespace DbFriendShell
         /// </param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            mainToolStripStatusLabel.Text = string.Empty;
+            this.mainToolStripStatusLabel.Text = string.Empty;
 
-            LoadConfiguredValues();
+            this.LoadConfiguredValues();
         }
 
         /// <summary>
@@ -113,17 +106,26 @@ namespace DbFriendShell
         /// </summary>
         private void LoadConfiguredValues()
         {
-            serverNameTextBox.Text = Settings.Default.server;
-            databaseNameTextBox.Text = Settings.Default.db;
+            this.serverNameTextBox.Text = Settings.Default.server;
+            this.databaseNameTextBox.Text = Settings.Default.db;
 
-            userNameTextBox.Text = Settings.Default.userid;
-            passwordTextBox.Text = Settings.Default.pwd;
+            this.userNameTextBox.Text = Settings.Default.userid;
+            this.passwordTextBox.Text = Settings.Default.pwd;
         }
 
-        private void integratedSecurityCheckBox_CheckedChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Checked Changed handler for Integrated Security
+        /// </summary>
+        /// <param name="sender">
+        /// The sender object.
+        /// </param>
+        /// <param name="e">
+        /// The EventArgs e.
+        /// </param>
+        private void IntegratedSecurityCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            userNameTextBox.Enabled = !integratedSecurityCheckBox.Checked;
-            passwordTextBox.Enabled = !integratedSecurityCheckBox.Checked;
+            this.userNameTextBox.Enabled = !this.integratedSecurityCheckBox.Checked;
+            this.passwordTextBox.Enabled = !this.integratedSecurityCheckBox.Checked;
         }
     }
 }

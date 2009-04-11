@@ -1,13 +1,34 @@
-using System;
-using System.Text;
+// --------------------------------------------------------------------------------------------------------------------- 
+// <copyright file="MsSqlStatementsTransformer.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Defines the MsSqlStatementsTransformer type.
+// </summary>
+// ---------------------------------------------------------------------------------------------------------------------
 
 namespace DbFriend.Core.Provider.MsSql
 {
+    using System;
+    using System.Text;
+
+    /// <summary>
+    /// </summary>
     public class MsSqlStatementsTransformer : IMsSqlStatementsTransformer
     {
+        #region IMsSqlStatementsTransformer Members
+
+        /// <summary>
+        /// </summary>
+        /// <param name="line">
+        /// The line.
+        /// </param>
+        /// <param name="builder">
+        /// The builder.
+        /// </param>
         public void Process(string line, StringBuilder builder)
         {
-            line = CleanLineStart(line);
+            line = this.CleanLineStart(line);
 
             if (line.StartsWith("GRANT ", StringComparison.OrdinalIgnoreCase))
             {
@@ -27,9 +48,18 @@ namespace DbFriend.Core.Provider.MsSql
             }
         }
 
+        #endregion
+
+        /// <summary>
+        /// </summary>
+        /// <param name="line">
+        /// The line.
+        /// </param>
+        /// <returns>
+        /// </returns>
         private string CleanLineStart(string line)
         {
-            char[] extraNewLineChars = new[]{'\r', '\n'};
+            char[] extraNewLineChars = new[] { '\r', '\n' };
             line = line.TrimStart(extraNewLineChars);
             return line;
         }

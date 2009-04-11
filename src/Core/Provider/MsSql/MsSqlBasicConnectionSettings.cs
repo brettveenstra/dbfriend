@@ -13,7 +13,6 @@ namespace DbFriend.Core.Provider.MsSql
     /// </summary>
     public class MsSqlBasicConnectionSettings : MsSqlConnectionSettingsBase
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="MsSqlBasicConnectionSettings"/> class.
         /// </summary>
@@ -29,21 +28,26 @@ namespace DbFriend.Core.Provider.MsSql
         /// <param name="databaseName">
         /// The database name.
         /// </param>
-        public MsSqlBasicConnectionSettings(
-            string serverInstance,
-            string userName,
-            string password,
-            string databaseName)
+        public MsSqlBasicConnectionSettings(string serverInstance, string userName, string password, string databaseName)
         {
-            this.serverInstance = serverInstance;
-            this.userName = userName;
-            this.password = password;
-            this.databaseName = databaseName;
+            this.ServerInstance = serverInstance;
+            this.UserName = userName;
+            this.Password = password;
+            this.DatabaseName = databaseName;
         }
 
+        /// <summary>
+        /// Gets Method.
+        /// </summary>
+        /// <value>
+        /// The method.
+        /// </value>
         public override MsSqlCredentialMethod Method
         {
-            get { return MsSqlCredentialMethod.SqlUser; }
+            get
+            {
+                return MsSqlCredentialMethod.SqlUser;
+            }
         }
     }
 }

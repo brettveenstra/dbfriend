@@ -183,7 +183,7 @@
             this.integratedSecurityCheckBox.TabIndex = 15;
             this.integratedSecurityCheckBox.Text = "Integrated Security";
             this.integratedSecurityCheckBox.UseVisualStyleBackColor = true;
-            this.integratedSecurityCheckBox.CheckedChanged += new System.EventHandler(this.integratedSecurityCheckBox_CheckedChanged);
+            this.integratedSecurityCheckBox.CheckedChanged += new System.EventHandler(this.IntegratedSecurityCheckBox_CheckedChanged);
             // 
             // MainForm
             // 
