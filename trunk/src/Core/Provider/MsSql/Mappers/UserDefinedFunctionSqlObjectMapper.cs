@@ -6,19 +6,32 @@
 //   Defines the UserDefinedFunctionSqlObjectMapper type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using DbFriend.Core.Provider.MsSql.Adapters;
-
 namespace DbFriend.Core.Provider.MsSql.Mappers
 {
+    using DbFriend.Core.Provider.MsSql.Adapters;
+
     /// <summary>
     /// </summary>
     public class UserDefinedFunctionSqlObjectMapper : IUserDefinedFunctionAdapterSqlObjectMapper
     {
+        /// <summary>
+        /// </summary>
         private IMsSqlDependencyRepository dependencyRepository;
+
+        /// <summary>
+        /// </summary>
         private IMsSqlStatementsTransformer transformer;
 
-        public UserDefinedFunctionSqlObjectMapper(IMsSqlStatementsTransformer transformer,
-                                                  IMsSqlDependencyRepository dependencyRepository)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserDefinedFunctionSqlObjectMapper"/> class. 
+        /// </summary>
+        /// <param name="transformer">
+        /// The transformer.
+        /// </param>
+        /// <param name="dependencyRepository">
+        /// The dependency repository.
+        /// </param>
+        public UserDefinedFunctionSqlObjectMapper(IMsSqlStatementsTransformer transformer, IMsSqlDependencyRepository dependencyRepository)
         {
             this.transformer = transformer;
             this.dependencyRepository = dependencyRepository;
@@ -35,7 +48,7 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
         /// </returns>
         public IMsSqlObject MapFrom(IUserDefinedFunctionAdapter from)
         {
-            return new MsSqlUserDefinedFunction(from, transformer, dependencyRepository);
+            return new MsSqlUserDefinedFunction(from, this.transformer, this.dependencyRepository);
         }
 
         #endregion

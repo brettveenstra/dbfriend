@@ -1,27 +1,62 @@
-using System;
-using System.Collections.Generic;
-using DbFriend.Core.Provider.MsSql.Adapters;
+// --------------------------------------------------------------------------------------------------------------------- 
+// <copyright file="MsSqlDependencyRepository.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Defines the MsSqlDependencyRepository type.
+// </summary>
+// ---------------------------------------------------------------------------------------------------------------------
 
 namespace DbFriend.Core.Provider.MsSql
 {
+    using System.Collections.Generic;
+
+    using DbFriend.Core.Provider.MsSql.Adapters;
+
+    /// <summary>
+    /// </summary>
     public class MsSqlDependencyRepository : IMsSqlDependencyRepository
     {
+        /// <summary>
+        /// </summary>
         private IDependencyWalkerAdapter dependencyWalkerAdapter;
+
+        /// <summary>
+        /// </summary>
         private IDependencyTreeNodeAdapterMsSqlObjectMapper mapper;
 
-        public MsSqlDependencyRepository(IDependencyTreeNodeAdapterMsSqlObjectMapper mapper,
-                                         IDependencyWalkerAdapter dependencyWalkerAdapter)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MsSqlDependencyRepository"/> class. 
+        /// </summary>
+        /// <param name="mapper">
+        /// The mapper.
+        /// </param>
+        /// <param name="dependencyWalkerAdapter">
+        /// The dependency walker adapter.
+        /// </param>
+        public MsSqlDependencyRepository(IDependencyTreeNodeAdapterMsSqlObjectMapper mapper, IDependencyWalkerAdapter dependencyWalkerAdapter)
         {
             this.mapper = mapper;
             this.dependencyWalkerAdapter = dependencyWalkerAdapter;
         }
 
-        public IEnumerable<IMsSqlObject> GetDependencies(IMsSqlObject msSqlObject)
+        #region IMsSqlDependencyRepository Members
+
+        /// <summary>
+        /// </summary>
+        /// <param name="mssqlObject">
+        /// The mssql object.
+        /// </param>
+        /// <returns>
+        /// </returns>
+        public IEnumerable<IMsSqlObject> GetDependencies(IMsSqlObject mssqlObject)
         {
-            foreach (IDependencyTreeNodeAdapter treeNodeAdapter in dependencyWalkerAdapter.DiscoveredDependencies(msSqlObject))
+            foreach (IDependencyTreeNodeAdapter treeNodeAdapter in this.dependencyWalkerAdapter.DiscoveredDependencies(mssqlObject))
             {
-                yield return mapper.MapFrom(treeNodeAdapter);
+                yield return this.mapper.MapFrom(treeNodeAdapter);
             }
         }
+
+        #endregion
     }
 }

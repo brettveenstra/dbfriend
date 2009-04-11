@@ -6,11 +6,12 @@
 //   Defines the Specification type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using MbUnit.Framework;
-using StructureMap.AutoMocking;
-
-namespace DbFriend.Testing.Utility
+namespace DbFriend.Testing.Unit.Utility
 {
+    using MbUnit.Framework;
+
+    using StructureMap.AutoMocking;
+
     /// <summary>
     /// </summary>
     /// <typeparam name="T">
@@ -33,7 +34,10 @@ namespace DbFriend.Testing.Utility
         /// </value>
         protected RhinoAutoMocker<T> MockingContext
         {
-            get { return mockingContext; }
+            get
+            {
+                return this.mockingContext;
+            }
         }
 
         /// <summary>
@@ -44,7 +48,10 @@ namespace DbFriend.Testing.Utility
         /// </value>
         protected T Sut
         {
-            get { return sut; }
+            get
+            {
+                return this.sut;
+            }
         }
 
         /// <summary>
@@ -52,10 +59,10 @@ namespace DbFriend.Testing.Utility
         [SetUp]
         public void Setup()
         {
-            mockingContext = new RhinoAutoMocker<T>(MockMode.AAA);
-            sut = mockingContext.ClassUnderTest;
+            this.mockingContext = new RhinoAutoMocker<T>(MockMode.AAA);
+            this.sut = this.mockingContext.ClassUnderTest;
 
-            Before_Each_Spec();
+            this.Before_Each_Spec();
         }
 
         /// <summary>
@@ -63,7 +70,7 @@ namespace DbFriend.Testing.Utility
         [TearDown]
         public void TearDown()
         {
-            After_Each_Spec();
+            this.After_Each_Spec();
         }
 
         /// <summary>
@@ -73,7 +80,7 @@ namespace DbFriend.Testing.Utility
         /// <returns>Mocked Type</returns>
         protected U MockA<U>() where U : class
         {
-            return mockingContext.AddAdditionalMockFor<U>();
+            return this.mockingContext.AddAdditionalMockFor<U>();
         }
 
         /// <summary>

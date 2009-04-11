@@ -6,12 +6,13 @@
 //   Defines the MsSqlFunctionStreamWriterAdapterMapper type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System.IO;
-using DbFriend.Core.Generator.Settings;
-using DbFriend.Core.Generator.Targets;
-
 namespace DbFriend.Core.Provider.MsSql.Mappers
 {
+    using System.IO;
+
+    using DbFriend.Core.Generator.Settings;
+    using DbFriend.Core.Generator.Targets;
+
     /// <summary>
     /// </summary>
     public class MsSqlFunctionStreamWriterAdapterMapper : IMsSqlFunctionStreamWriterAdapterMapper
@@ -42,15 +43,9 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
         /// </returns>
         public IDbObjectStreamWriterAdapter MapFrom(IMsSqlObject from)
         {
-            string fileName = CleanOwnerDomain(from) + "." + from.Name + ".UDF";
+            string fileName = this.CleanOwnerDomain(from) + "." + from.Name + ".UDF";
 
-
-            string outputFileName = Path.Combine(
-                    Path.Combine(
-                            Path.Combine(
-                                    setting.OutputFolder, "DbScripts"),
-                            "UDFs"),
-                    fileName);
+            string outputFileName = Path.Combine(Path.Combine(Path.Combine(this.setting.OutputFolder, "DbScripts"), "UDFs"), fileName);
 
             return new DbObjectStreamWriterAdapter(from, outputFileName);
         }

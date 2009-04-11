@@ -6,16 +6,17 @@
 //   Defines the Vs2008SolutionGenerator type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using DbFriend.Core.Generator.Settings;
-using DbFriend.Core.Graph;
-using DbFriend.Core.Provider.MsSql;
-
 namespace DbFriend.Core.Generator
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.IO;
+
+    using DbFriend.Core.Generator.Settings;
+    using DbFriend.Core.Graph;
+    using DbFriend.Core.Provider.MsSql;
+
     /// <summary>
     /// </summary>
     public class Vs2008SolutionGenerator : IDbSolutionGenerator
@@ -32,6 +33,8 @@ namespace DbFriend.Core.Generator
         /// </summary>
         private readonly IDbScriptFolderConfigurationSetting folderSettings;
 
+        /// <summary>
+        /// </summary>
         private IDependencyGraph dependencyGraph;
 
         /// <summary>
@@ -46,12 +49,13 @@ namespace DbFriend.Core.Generator
         /// <param name="fileGenerator">
         /// The file Generator.
         /// </param>
-        /// <param name="dependencyGraph"></param>
+        /// <param name="dependencyGraph">
+        /// </param>
         public Vs2008SolutionGenerator(
-            IMsSqlConnectionSettings databaseSettings,
-            IDbScriptFolderConfigurationSetting folderSettings,
-            IVelocityFileGenerator fileGenerator,
-            IDependencyGraph dependencyGraph)
+                IMsSqlConnectionSettings databaseSettings,
+                IDbScriptFolderConfigurationSetting folderSettings,
+                IVelocityFileGenerator fileGenerator,
+                IDependencyGraph dependencyGraph)
         {
             this.databaseSettings = databaseSettings;
             this.fileGenerator = fileGenerator;
@@ -69,7 +73,7 @@ namespace DbFriend.Core.Generator
         {
             get
             {
-                string buildPath = Path.Combine(OutputPath, "build");
+                string buildPath = Path.Combine(this.OutputPath, "build");
                 return Path.Combine(buildPath, "baseline");
             }
         }
@@ -82,7 +86,10 @@ namespace DbFriend.Core.Generator
         /// </value>
         private string SandboxDatabaseName
         {
-            get { return databaseSettings.DatabaseName + "Sandbox"; }
+            get
+            {
+                return this.databaseSettings.DatabaseName + "Sandbox";
+            }
         }
 
         /// <summary>
@@ -93,7 +100,10 @@ namespace DbFriend.Core.Generator
         /// </value>
         private string BuildPath
         {
-            get { return Path.Combine(OutputPath, "build"); }
+            get
+            {
+                return Path.Combine(this.OutputPath, "build");
+            }
         }
 
         /// <summary>
@@ -104,7 +114,10 @@ namespace DbFriend.Core.Generator
         /// </value>
         private string OutputPath
         {
-            get { return folderSettings.OutputFolder; }
+            get
+            {
+                return this.folderSettings.OutputFolder;
+            }
         }
 
         /// <summary>
@@ -115,7 +128,10 @@ namespace DbFriend.Core.Generator
         /// </value>
         private string SandboxPath
         {
-            get { return Path.Combine(BuildPath, "sandbox"); }
+            get
+            {
+                return Path.Combine(this.BuildPath, "sandbox");
+            }
         }
 
         #region IDbSolutionGenerator Members
@@ -127,21 +143,20 @@ namespace DbFriend.Core.Generator
         /// </param>
         public void Generate(Action<string> message)
         {
+            this.MoveDbScriptsToFinalFolders();
 
-            MoveDbScriptsToFinalFolders();
+            this.CreateSolutionFile();
+            this.CreateDbProjectFile();
 
-            CreateSolutionFile();
-            CreateDbProjectFile();
+            this.CreateBatchFiles();
 
-            CreateBatchFiles();
+            this.CreateNantBuildFiles();
 
-            CreateNantBuildFiles();
+            this.CreateSqlSandboxFiles();
 
-            CreateSqlSandboxFiles();
+            this.CreateDeveloperProperties();
 
-            CreateDeveloperProperties();
-
-            CopyFolderSkeleton();
+            this.CopyFolderSkeleton();
         }
 
         #endregion
@@ -150,13 +165,12 @@ namespace DbFriend.Core.Generator
         /// </summary>
         private void CreateDeveloperProperties()
         {
-            Directory.CreateDirectory(OutputPath);
+            Directory.CreateDirectory(this.OutputPath);
 
             Hashtable velocityContext = new Hashtable();
-            velocityContext["dbfriend-projectName"] = databaseSettings.DatabaseName;
+            velocityContext["dbfriend-projectName"] = this.databaseSettings.DatabaseName;
 
-            GenerateFile(velocityContext, "developer.properties.xml.vm",
-                         Path.Combine(BuildPath, "developer.properties.xml"));
+            this.GenerateFile(velocityContext, "developer.properties.xml.vm", Path.Combine(this.BuildPath, "developer.properties.xml"));
         }
 
         /// <summary>
@@ -167,18 +181,18 @@ namespace DbFriend.Core.Generator
             string resources = Path.Combine(Directory.GetCurrentDirectory(), "Resources");
             string skeleton = Path.Combine(resources, "skeleton");
 
-            copier.Copy(skeleton, OutputPath);
+            copier.Copy(skeleton, this.OutputPath);
         }
 
         /// <summary>
         /// </summary>
         private void MoveDbScriptsToFinalFolders()
         {
-            Directory.CreateDirectory(BuildPath);
-            MakeSureTargetDirectoryIsMissing(BaselinePath);
+            Directory.CreateDirectory(this.BuildPath);
+            this.MakeSureTargetDirectoryIsMissing(this.BaselinePath);
 
-            DirectoryInfo directoryInfo = new DirectoryInfo(Path.Combine(OutputPath, "DbScripts"));
-            directoryInfo.MoveTo(BaselinePath);
+            DirectoryInfo directoryInfo = new DirectoryInfo(Path.Combine(this.OutputPath, "DbScripts"));
+            directoryInfo.MoveTo(this.BaselinePath);
         }
 
         /// <summary>
@@ -199,22 +213,24 @@ namespace DbFriend.Core.Generator
         /// </summary>
         private void CreateDbProjectFile()
         {
-            Directory.CreateDirectory(OutputPath);
+            Directory.CreateDirectory(this.OutputPath);
 
             Hashtable velocityContext = new Hashtable();
 
-            string dbrefString = string.Format("{0}.{1}.dbo", "localhost", SandboxDatabaseName);
+            string dbrefString = string.Format("{0}.{1}.dbo", "localhost", this.SandboxDatabaseName);
             velocityContext["dbref"] = dbrefString;
-            velocityContext["dbconnstring"] =
-                string.Format("Data Source=localhost;Initial Catalog={0};Integrated Security=True;", SandboxDatabaseName);
-            velocityContext["spList"] = GetScriptedStoredProcedureList();
-            velocityContext["tableList"] = GetScriptedTableList();
-            velocityContext["functionList"] = GetScriptedFunctionList();
-            velocityContext["viewList"] = GetScriptedViewList();
-            velocityContext["projectName"] = databaseSettings.DatabaseName;
+            velocityContext["dbconnstring"] = string.Format(
+                    "Data Source=localhost;Initial Catalog={0};Integrated Security=True;", this.SandboxDatabaseName);
+            velocityContext["spList"] = this.GetScriptedStoredProcedureList();
+            velocityContext["tableList"] = this.GetScriptedTableList();
+            velocityContext["functionList"] = this.GetScriptedFunctionList();
+            velocityContext["viewList"] = this.GetScriptedViewList();
+            velocityContext["projectName"] = this.databaseSettings.DatabaseName;
 
-            GenerateFile(velocityContext, Path.Combine("VS2008", "stub.dbp.vm"),
-                         Path.Combine(OutputPath, databaseSettings.DatabaseName + "DB.dbp"));
+            this.GenerateFile(
+                    velocityContext,
+                    Path.Combine("VS2008", "stub.dbp.vm"),
+                    Path.Combine(this.OutputPath, this.databaseSettings.DatabaseName + "DB.dbp"));
         }
 
         /// <summary>
@@ -223,12 +239,12 @@ namespace DbFriend.Core.Generator
         /// </returns>
         private List<IScriptedView> GetScriptedViewList()
         {
-            string baselinePath = BaselinePath;
+            string baselinePath = this.BaselinePath;
 
             List<IScriptedView> list = new List<IScriptedView>();
             foreach (string fileName in Directory.GetFiles(Path.Combine(baselinePath, "Views")))
             {
-                list.Add(new ScriptedView(GetBaseFileName(fileName)));
+                list.Add(new ScriptedView(this.GetBaseFileName(fileName)));
             }
 
             return list;
@@ -240,12 +256,12 @@ namespace DbFriend.Core.Generator
         /// </returns>
         private List<IScriptedFunction> GetScriptedFunctionList()
         {
-            string baselinePath = BaselinePath;
+            string baselinePath = this.BaselinePath;
 
             List<IScriptedFunction> list = new List<IScriptedFunction>();
             foreach (string fileName in Directory.GetFiles(Path.Combine(baselinePath, "UDFs")))
             {
-                list.Add(new ScriptedFunction(GetBaseFileName(fileName)));
+                list.Add(new ScriptedFunction(this.GetBaseFileName(fileName)));
             }
 
             return list;
@@ -257,12 +273,12 @@ namespace DbFriend.Core.Generator
         /// </returns>
         private List<IScriptedTable> GetScriptedTableList()
         {
-            string baselinePath = BaselinePath;
+            string baselinePath = this.BaselinePath;
 
             List<IScriptedTable> list = new List<IScriptedTable>();
             foreach (string fileName in Directory.GetFiles(Path.Combine(baselinePath, "Tables")))
             {
-                list.Add(new ScriptedTable(GetBaseFileName(fileName)));
+                list.Add(new ScriptedTable(this.GetBaseFileName(fileName)));
             }
 
             return list;
@@ -274,12 +290,12 @@ namespace DbFriend.Core.Generator
         /// </returns>
         private List<IScriptedStoredProcedure> GetScriptedStoredProcedureList()
         {
-            string baselinePath = BaselinePath;
+            string baselinePath = this.BaselinePath;
 
             List<IScriptedStoredProcedure> list = new List<IScriptedStoredProcedure>();
             foreach (string fileName in Directory.GetFiles(Path.Combine(baselinePath, "SPs")))
             {
-                list.Add(new ScriptedStoredProcedure(GetBaseFileName(fileName)));
+                list.Add(new ScriptedStoredProcedure(this.GetBaseFileName(fileName)));
             }
 
             return list;
@@ -302,14 +318,16 @@ namespace DbFriend.Core.Generator
         /// </summary>
         private void CreateSolutionFile()
         {
-            Directory.CreateDirectory(OutputPath);
+            Directory.CreateDirectory(this.OutputPath);
 
             Hashtable velocityContext = new Hashtable();
             velocityContext["dbGuid"] = Guid.NewGuid().ToString().ToUpper();
-            velocityContext["projectName"] = databaseSettings.DatabaseName;
+            velocityContext["projectName"] = this.databaseSettings.DatabaseName;
 
-            GenerateFile(velocityContext, Path.Combine("VS2008", "stub.sln.vm"),
-                         Path.Combine(OutputPath, databaseSettings.DatabaseName + "DB.sln"));
+            this.GenerateFile(
+                    velocityContext,
+                    Path.Combine("VS2008", "stub.sln.vm"),
+                    Path.Combine(this.OutputPath, this.databaseSettings.DatabaseName + "DB.sln"));
         }
 
         /// <summary>
@@ -317,14 +335,14 @@ namespace DbFriend.Core.Generator
         private void CreateBatchFiles()
         {
             Hashtable velocityContext = new Hashtable();
-            velocityContext["projectName"] = databaseSettings.DatabaseName;
+            velocityContext["projectName"] = this.databaseSettings.DatabaseName;
 
-            GenerateFile(velocityContext, "build.bat.vm", Path.Combine(BuildPath, "build.bat"));
-            GenerateFile(velocityContext, "setupdb.bat.vm", Path.Combine(BuildPath, "setupdb.bat"));
-            GenerateFile(velocityContext, "sql.bat.vm", Path.Combine(BuildPath, "sql.bat"));
-            GenerateFile(velocityContext, "explore.bat.vm", Path.Combine(BuildPath, "explore.bat"));
+            this.GenerateFile(velocityContext, "build.bat.vm", Path.Combine(this.BuildPath, "build.bat"));
+            this.GenerateFile(velocityContext, "setupdb.bat.vm", Path.Combine(this.BuildPath, "setupdb.bat"));
+            this.GenerateFile(velocityContext, "sql.bat.vm", Path.Combine(this.BuildPath, "sql.bat"));
+            this.GenerateFile(velocityContext, "explore.bat.vm", Path.Combine(this.BuildPath, "explore.bat"));
 
-            GenerateFile(velocityContext, Path.Combine("VS2008", "open.bat.vm"), Path.Combine(BuildPath, "open.bat"));
+            this.GenerateFile(velocityContext, Path.Combine("VS2008", "open.bat.vm"), Path.Combine(this.BuildPath, "open.bat"));
         }
 
         /// <summary>
@@ -332,37 +350,38 @@ namespace DbFriend.Core.Generator
         private void CreateNantBuildFiles()
         {
             Hashtable velocityContext = new Hashtable();
-            velocityContext["projectName"] = databaseSettings.DatabaseName;
+            velocityContext["projectName"] = this.databaseSettings.DatabaseName;
             velocityContext["dbfriend-nantGetCurrentDirectory"] = "${directory::get-current-directory()}";
-            velocityContext["dbfriend-nantGetBaseDir"] =
-                "${directory::get-parent-directory(project::get-base-directory())}";
-            velocityContext["sqlobjectlist"] = GetOrderedDependencyList();
+            velocityContext["dbfriend-nantGetBaseDir"] = "${directory::get-parent-directory(project::get-base-directory())}";
+            velocityContext["sqlobjectlist"] = this.GetOrderedDependencyList();
 
-            GenerateFile(velocityContext, "stub.build.vm",
-                         Path.Combine(BuildPath, databaseSettings.DatabaseName + ".build"));
-            GenerateFile(velocityContext, "stub.core.build.vm",
-                         Path.Combine(BuildPath, databaseSettings.DatabaseName + ".core.build"));
+            this.GenerateFile(velocityContext, "stub.build.vm", Path.Combine(this.BuildPath, this.databaseSettings.DatabaseName + ".build"));
+            this.GenerateFile(velocityContext, "stub.core.build.vm", Path.Combine(this.BuildPath, this.databaseSettings.DatabaseName + ".core.build"));
         }
 
+        /// <summary>
+        /// </summary>
+        /// <returns>
+        /// </returns>
         private List<IMsSqlObject> GetOrderedDependencyList()
         {
-            return new List<IMsSqlObject>(dependencyGraph.OrderedDependencies);
+            return new List<IMsSqlObject>(this.dependencyGraph.OrderedDependencies);
         }
 
         /// <summary>
         /// </summary>
         private void CreateSqlSandboxFiles()
         {
-            Directory.CreateDirectory(SandboxPath);
+            Directory.CreateDirectory(this.SandboxPath);
 
             Hashtable velocityContext = new Hashtable();
-            velocityContext["projectName"] = databaseSettings.DatabaseName;
+            velocityContext["projectName"] = this.databaseSettings.DatabaseName;
 
-            GenerateFile(velocityContext, "01_CreateSandbox.sql.vm", Path.Combine(SandboxPath, "01_CreateSandbox.sql"));
-            GenerateFile(velocityContext, "02_SetupExternalDependencies.sql.vm",
-                         Path.Combine(SandboxPath, "02_SetupExternalDependencies.sql"));
-            GenerateFile(velocityContext, "03_DefineSynonyms.sql.vm", Path.Combine(SandboxPath, "03_DefineSynonyms.sql"));
-            GenerateFile(velocityContext, "04_BuildShell.sql.vm", Path.Combine(SandboxPath, "04_BuildShell.sql"));
+            this.GenerateFile(velocityContext, "01_CreateSandbox.sql.vm", Path.Combine(this.SandboxPath, "01_CreateSandbox.sql"));
+            this.GenerateFile(
+                    velocityContext, "02_SetupExternalDependencies.sql.vm", Path.Combine(this.SandboxPath, "02_SetupExternalDependencies.sql"));
+            this.GenerateFile(velocityContext, "03_DefineSynonyms.sql.vm", Path.Combine(this.SandboxPath, "03_DefineSynonyms.sql"));
+            this.GenerateFile(velocityContext, "04_BuildShell.sql.vm", Path.Combine(this.SandboxPath, "04_BuildShell.sql"));
         }
 
         /// <summary>
@@ -378,7 +397,7 @@ namespace DbFriend.Core.Generator
         /// </param>
         private void GenerateFile(Hashtable velocityContext, string templatePath, string outputFile)
         {
-            fileGenerator.Generate(templatePath, outputFile, velocityContext);
+            this.fileGenerator.Generate(templatePath, outputFile, velocityContext);
         }
     }
 }

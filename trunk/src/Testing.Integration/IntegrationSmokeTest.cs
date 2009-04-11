@@ -6,15 +6,15 @@
 //   Defines the IntegrationSmokeTest type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System.Data.SqlClient;
-using System.Diagnostics;
-using Microsoft.SqlServer.Management.Common;
-using Microsoft.SqlServer.Management.Smo;
-using StructureMap;
-using Settings=DbFriend.Testing.Integration.Properties.Settings;
-
 namespace DbFriend.Testing.Integration
 {
+    using System.Data.SqlClient;
+    using System.Diagnostics;
+    using Microsoft.SqlServer.Management.Common;
+    using Microsoft.SqlServer.Management.Smo;
+    using StructureMap;
+    using Settings = DbFriend.Testing.Integration.Properties.Settings;
+
     /// <summary>
     /// </summary>
     public class IntegrationSmokeTest
@@ -39,9 +39,8 @@ namespace DbFriend.Testing.Integration
             Server server = new Server(serverConnection);
             Database database = server.Databases[Settings.Default.db];
 
-            CheckIntegrationDatabaseIsSetup(serverConnection);
+            this.CheckIntegrationDatabaseIsSetup(serverConnection);
         }
-
 
         /// <summary>
         /// </summary>

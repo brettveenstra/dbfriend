@@ -1,18 +1,21 @@
 // --------------------------------------------------------------------------------------------------------------------- 
-// <copyright file="DbScriptFileTargetTest.cs" company="">
+// <copyright file="DbScriptOutputFolderPipelineTest.cs" company="">
 //   
 // </copyright>
 // <summary>
 //   Defines the DbScriptFileTargetTest type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System.Collections.Generic;
-using DbFriend.Core.Generator.Targets;
-using MbUnit.Framework;
-using Rhino.Mocks;
-
 namespace DbFriend.Testing.Unit.Generator
 {
+    using System.Collections.Generic;
+
+    using DbFriend.Core.Generator.Targets;
+
+    using MbUnit.Framework;
+
+    using Rhino.Mocks;
+
     /// <summary>
     /// </summary>
     [TestFixture]
@@ -29,7 +32,7 @@ namespace DbFriend.Testing.Unit.Generator
 
             IDbScriptFolderManager manager = MockRepository.GenerateMock<IDbScriptFolderManager>();
             manager.Expect(x => x.Prepare());
-            
+
             // act
             DbScriptOutputFolderPipeline sut = new DbScriptOutputFolderPipeline(manager);
             sut.WireIn(adapter);

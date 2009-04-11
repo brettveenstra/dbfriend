@@ -1,14 +1,34 @@
-using System.Collections.Generic;
-using DbFriend.Core.Provider.MsSql;
-using DbFriend.Testing.Utility;
-using MbUnit.Framework;
-using Rhino.Mocks;
-using DbFriend.Testing.Extensions;
-
+// --------------------------------------------------------------------------------------------------------------------- 
+// <copyright file="MsSqlStoredProcTest.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Defines the MsSqlStoredProcTest type.
+// </summary>
+// ---------------------------------------------------------------------------------------------------------------------
 namespace DbFriend.Testing.Unit.Provider.MsSql
 {
+    using System.Collections.Generic;
+
+    using DbFriend.Core.Provider.MsSql;
+    using DbFriend.Testing.Extensions;
+
+    using MbUnit.Framework;
+
+    using Rhino.Mocks;
+
+    using Utility;
+
+    /// <summary>
+    /// </summary>
     public class MsSqlStoredProcTest : Specification<MsSqlStoredProc>
     {
+        /// <summary>
+        /// Gets StubEnumerableMsSqlObjects.
+        /// </summary>
+        /// <value>
+        /// The stub enumerable ms sql objects.
+        /// </value>
         protected IEnumerable<IMsSqlObject> StubEnumerableMsSqlObjects
         {
             get
@@ -18,24 +38,24 @@ namespace DbFriend.Testing.Unit.Provider.MsSql
             }
         }
 
+        /// <summary>
+        /// </summary>
         [Test]
         public void Can_Provide_Dependencies()
         {
-            IMsSqlDependencyRepository dependencyRepository = MockingContext.Get<IMsSqlDependencyRepository>();
+            IMsSqlDependencyRepository dependencyRepository = this.MockingContext.Get<IMsSqlDependencyRepository>();
 
-            dependencyRepository.Expect(x => x.GetDependencies(Sut))
-                .Return(StubEnumerableMsSqlObjects);
+            dependencyRepository.Expect(x => x.GetDependencies(this.Sut)).Return(this.StubEnumerableMsSqlObjects);
 
-            List<IMsSqlObject> list = new List<IMsSqlObject>(Sut.Dependencies);
-
+            List<IMsSqlObject> list = new List<IMsSqlObject>(this.Sut.Dependencies);
 
             list.Count.ShouldBe(2);
 
             dependencyRepository.VerifyAllExpectations();
-
-
         }
 
+        /// <summary>
+        /// </summary>
         protected override void Before_Each_Spec()
         {
         }

@@ -6,25 +6,31 @@
 //   Defines the MsSqlStoredProc type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Text;
-using DbFriend.Core.Provider.MsSql.Adapters;
-using Microsoft.SqlServer.Management.Smo;
-
 namespace DbFriend.Core.Provider.MsSql
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Text;
+
+    using DbFriend.Core.Provider.MsSql.Adapters;
+
+    using Microsoft.SqlServer.Management.Smo;
+
     /// <summary>
     /// </summary>
     public class MsSqlStoredProc : IMsSqlStoredProc
     {
+        /// <summary>
+        /// </summary>
         private readonly IMsSqlDependencyRepository dependencyRepository;
 
         /// <summary>
         /// </summary>
         private readonly IStoredProcedureAdapter storedProcedure;
 
+        /// <summary>
+        /// </summary>
         private IMsSqlStatementsTransformer statementTransformer;
 
         /// <summary>
@@ -33,13 +39,15 @@ namespace DbFriend.Core.Provider.MsSql
         /// <param name="storedProcedure">
         /// The stored procedure.
         /// </param>
-        /// <param name="transformer"></param>
-        /// <param name="dependencyRepository"></param>
-        public MsSqlStoredProc(IStoredProcedureAdapter storedProcedure, IMsSqlStatementsTransformer transformer,
-                               IMsSqlDependencyRepository dependencyRepository)
+        /// <param name="transformer">
+        /// </param>
+        /// <param name="dependencyRepository">
+        /// </param>
+        public MsSqlStoredProc(
+                IStoredProcedureAdapter storedProcedure, IMsSqlStatementsTransformer transformer, IMsSqlDependencyRepository dependencyRepository)
         {
             this.storedProcedure = storedProcedure;
-            statementTransformer = transformer;
+            this.statementTransformer = transformer;
             this.dependencyRepository = dependencyRepository;
         }
 
@@ -53,12 +61,24 @@ namespace DbFriend.Core.Provider.MsSql
         /// </value>
         public string Name
         {
-            get { return storedProcedure.Name; }
+            get
+            {
+                return this.storedProcedure.Name;
+            }
         }
 
+        /// <summary>
+        /// Gets Type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
         public string Type
         {
-            get { return "storedprocedure"; }
+            get
+            {
+                return "storedprocedure";
+            }
         }
 
         /// <summary>
@@ -69,23 +89,41 @@ namespace DbFriend.Core.Provider.MsSql
         /// </value>
         public string Owner
         {
-            get { return storedProcedure.Owner; }
+            get
+            {
+                return this.storedProcedure.Owner;
+            }
         }
 
+        /// <summary>
+        /// Gets Dependencies.
+        /// </summary>
+        /// <value>
+        /// The dependencies.
+        /// </value>
         public IEnumerable<IMsSqlObject> Dependencies
         {
             get
             {
-                foreach (IMsSqlObject sqlObject in dependencyRepository.GetDependencies(this))
+                foreach (IMsSqlObject sqlObject in this.dependencyRepository.GetDependencies(this))
                 {
                     yield return sqlObject;
                 }
             }
         }
 
+        /// <summary>
+        /// Gets UrnString.
+        /// </summary>
+        /// <value>
+        /// The urn string.
+        /// </value>
         public string UrnString
         {
-            get { return storedProcedure.Urn; }
+            get
+            {
+                return this.storedProcedure.Urn;
+            }
         }
 
         /// <summary>
@@ -94,9 +132,9 @@ namespace DbFriend.Core.Provider.MsSql
         /// </returns>
         public string Script()
         {
-            string dropScript = ScriptDrop(new BaselineScriptingOptionsAdapter().Options);
+            string dropScript = this.ScriptDrop(new BaselineScriptingOptionsAdapter().Options);
 
-            string createScript = ScriptCreate(new BaselineScriptingOptionsAdapter().Options);
+            string createScript = this.ScriptCreate(new BaselineScriptingOptionsAdapter().Options);
 
             return dropScript + createScript;
         }
@@ -115,12 +153,12 @@ namespace DbFriend.Core.Provider.MsSql
             options.ScriptDrops = false;
             options.IncludeIfNotExists = false;
 
-            StringCollection lines = storedProcedure.Script(options);
+            StringCollection lines = this.storedProcedure.Script(options);
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (string line in lines)
             {
-                statementTransformer.Process(line, stringBuilder);
+                this.statementTransformer.Process(line, stringBuilder);
             }
 
             if (stringBuilder.Length > 0)
@@ -143,12 +181,12 @@ namespace DbFriend.Core.Provider.MsSql
             options.ScriptDrops = true;
             options.IncludeIfNotExists = true;
 
-            StringCollection lines = storedProcedure.Script(options);
+            StringCollection lines = this.storedProcedure.Script(options);
             StringBuilder stringBuilder = new StringBuilder();
 
             foreach (string line in lines)
             {
-                statementTransformer.Process(line, stringBuilder);
+                this.statementTransformer.Process(line, stringBuilder);
             }
 
             if (stringBuilder.Length > 0)

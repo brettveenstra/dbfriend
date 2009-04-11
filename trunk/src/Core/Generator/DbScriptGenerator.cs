@@ -6,13 +6,14 @@
 //   Defines the DbScriptGenerator type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System;
-using DbFriend.Core.Generator.Settings;
-using DbFriend.Core.Generator.Targets;
-using DbFriend.Core.Provider;
-
 namespace DbFriend.Core.Generator
 {
+    using System;
+
+    using DbFriend.Core.Generator.Settings;
+    using DbFriend.Core.Generator.Targets;
+    using DbFriend.Core.Provider;
+
     /// <summary>
     /// </summary>
     public class DbScriptGenerator : IDbScriptGenerator
@@ -46,10 +47,8 @@ namespace DbFriend.Core.Generator
         /// </param>
         /// <param name="setting">
         /// </param>
-        public DbScriptGenerator(IDbScriptProvider provider,
-                                 IDatabase database,
-                                 IDbScriptOutputPipeline outputPipeline,
-                                 IDbScriptFolderConfigurationSetting setting)
+        public DbScriptGenerator(
+                IDbScriptProvider provider, IDatabase database, IDbScriptOutputPipeline outputPipeline, IDbScriptFolderConfigurationSetting setting)
         {
             this.provider = provider;
             this.setting = setting;
@@ -66,11 +65,7 @@ namespace DbFriend.Core.Generator
         /// </param>
         public void ScriptDb(Action<IDbScriptObjectUpdate> updateAction)
         {
-            provider
-                    .ScriptUsing(outputPipeline)
-                    .NotifyingActionsWith(updateAction)
-                    .WithSetting(setting)
-                    .ForTheDatabase(database);
+            this.provider.ScriptUsing(this.outputPipeline).NotifyingActionsWith(updateAction).WithSetting(this.setting).ForTheDatabase(this.database);
         }
 
         #endregion

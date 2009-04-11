@@ -67,9 +67,9 @@
 	</target>
 	
 	<target name="dist">
-		<echo message="Copying files from [${build.dir.drop}\DbFriendShell] to [${build.dir}\dist]" />
+		<echo message="Copying files from [${build.dir.drop}\DbFriend.Shell] to [${build.dir}\dist]" />
 		<copy todir="${build.dir}\dist">
-			<fileset basedir="${build.dir.drop}\DbFriendShell">
+			<fileset basedir="${build.dir.drop}\DbFriend.Shell">
 				<include name="**\*"/>
 				<exclude name="**\*.pdb" />
 			</fileset>

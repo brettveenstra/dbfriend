@@ -6,17 +6,20 @@
 //   Defines the DbScriptTest type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System.Diagnostics;
-using DbFriend.Core.Generator;
-using DbFriend.Core.Generator.Settings;
-using DbFriend.Core.Generator.Targets;
-using DbFriend.Core.Provider;
-using DbFriend.Core.Provider.MsSql;
-using MbUnit.Framework;
-using StructureMap;
-
 namespace DbFriend.Testing.Integration
 {
+    using System.Diagnostics;
+
+    using DbFriend.Core.Generator;
+    using DbFriend.Core.Generator.Settings;
+    using DbFriend.Core.Generator.Targets;
+    using DbFriend.Core.Provider;
+    using DbFriend.Core.Provider.MsSql;
+
+    using MbUnit.Framework;
+
+    using StructureMap;
+
     /// <summary>
     /// </summary>
     [TestFixture]
@@ -32,12 +35,13 @@ namespace DbFriend.Testing.Integration
                     ObjectFactory.GetInstance<IMsSqlScriptProvider>(),
                     ObjectFactory.GetInstance<IDatabase>(),
                     ObjectFactory.GetInstance<IDbScriptOutputPipeline>(),
-                    ObjectFactory.GetInstance<IDbScriptFolderConfigurationSetting>()
-                    );
+                    ObjectFactory.GetInstance<IDbScriptFolderConfigurationSetting>());
 
             generator.ScriptDb(a => Debug.WriteLine(a.UpdateMessage));
         }
 
+        /// <summary>
+        /// </summary>
         [Test]
         public void Script_The_Database_To_Folder_IntegratedSecurity()
         {
@@ -46,11 +50,9 @@ namespace DbFriend.Testing.Integration
                     ObjectFactory.GetInstance<IMsSqlScriptProvider>(),
                     ObjectFactory.GetInstance<IDatabase>(),
                     ObjectFactory.GetInstance<IDbScriptOutputPipeline>(),
-                    ObjectFactory.GetInstance<IDbScriptFolderConfigurationSetting>()
-                    );
+                    ObjectFactory.GetInstance<IDbScriptFolderConfigurationSetting>());
 
             generator.ScriptDb(a => Debug.WriteLine(a.UpdateMessage));
-
         }
     }
 }

@@ -6,20 +6,23 @@
 //   Defines the MsSqlDatabaseConnectionAdapter type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
-using System;
-using System.Collections.Generic;
-using DbFriend.Core.Provider.MsSql.Mappers;
-using Microsoft.SqlServer.Management.Common;
-using Microsoft.SqlServer.Management.Smo;
-using StructureMap;
-using StructureMap.Pipeline;
-
 namespace DbFriend.Core.Provider.MsSql.Adapters
 {
+    using System;
+    using System.Collections.Generic;
+
+    using DbFriend.Core.Provider.MsSql.Mappers;
+
+    using Microsoft.SqlServer.Management.Common;
+    using Microsoft.SqlServer.Management.Smo;
+
     /// <summary>
     /// </summary>
     public class MsSqlDatabaseConnectionAdapter : IMsSqlDatabaseConnectionAdapter
     {
+        /// <summary>
+        /// </summary>
+        private readonly IUserDefinedFunctionAdapterSqlObjectMapper functionAdapterMapper;
 
         /// <summary>
         /// </summary>
@@ -36,10 +39,6 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         /// <summary>
         /// </summary>
         private readonly IViewAdapterMsSqlObjectMapper viewAdapterMapper;
-
-        /// <summary>
-        /// </summary>
-        private readonly IUserDefinedFunctionAdapterSqlObjectMapper functionAdapterMapper;
 
         /// <summary>
         /// </summary>
@@ -86,9 +85,9 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         {
             get
             {
-                if (serverConnection != null)
+                if (this.serverConnection != null)
                 {
-                    return serverConnection.IsOpen;
+                    return this.serverConnection.IsOpen;
                 }
 
                 return false;
@@ -105,13 +104,13 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         {
             get
             {
-                MakeSureConnectionIsOpen();
+                this.MakeSureConnectionIsOpen();
 
-                foreach (IStoredProcedureAdapter storedProcedure in GetDatabase().StoredProcedures)
+                foreach (IStoredProcedureAdapter storedProcedure in this.GetDatabase().StoredProcedures)
                 {
                     if (storedProcedure.IsSystemObject == false)
                     {
-                        yield return storedProcMapper.MapFrom(storedProcedure);
+                        yield return this.storedProcMapper.MapFrom(storedProcedure);
                     }
                 }
             }
@@ -127,13 +126,13 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         {
             get
             {
-                MakeSureConnectionIsOpen();
+                this.MakeSureConnectionIsOpen();
 
-                foreach (ITableAdapter table in GetDatabase().Tables)
+                foreach (ITableAdapter table in this.GetDatabase().Tables)
                 {
                     if (table.IsSystemObject == false)
                     {
-                        yield return tableAdapterMapper.MapFrom(table);
+                        yield return this.tableAdapterMapper.MapFrom(table);
                     }
                 }
             }
@@ -149,13 +148,13 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         {
             get
             {
-                MakeSureConnectionIsOpen();
+                this.MakeSureConnectionIsOpen();
 
-                foreach (IViewAdapter view in GetDatabase().Views)
+                foreach (IViewAdapter view in this.GetDatabase().Views)
                 {
                     if (view.IsSystemObject == false)
                     {
-                        yield return viewAdapterMapper.MapFrom(view);
+                        yield return this.viewAdapterMapper.MapFrom(view);
                     }
                 }
             }
@@ -171,13 +170,13 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         {
             get
             {
-                MakeSureConnectionIsOpen();
+                this.MakeSureConnectionIsOpen();
 
-                foreach (IUserDefinedFunctionAdapter userDefinedFunction in GetDatabase().UserDefinedFunctions)
+                foreach (IUserDefinedFunctionAdapter userDefinedFunction in this.GetDatabase().UserDefinedFunctions)
                 {
                     if (userDefinedFunction.IsSystemObject == false)
                     {
-                        yield return functionAdapterMapper.MapFrom(userDefinedFunction);
+                        yield return this.functionAdapterMapper.MapFrom(userDefinedFunction);
                     }
                 }
             }
@@ -187,11 +186,11 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         /// </summary>
         public void Dispose()
         {
-            if (serverConnection != null)
+            if (this.serverConnection != null)
             {
-                if (serverConnection.IsOpen)
+                if (this.serverConnection.IsOpen)
                 {
-                    serverConnection.Disconnect();
+                    this.serverConnection.Disconnect();
                 }
             }
         }
@@ -201,21 +200,21 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         /// </summary>
         public void Connect()
         {
-            if (serverConnection == null)
+            if (this.serverConnection == null)
             {
-                if (settings.Method == MsSqlCredentialMethod.SqlUser)
+                if (this.settings.Method == MsSqlCredentialMethod.SqlUser)
                 {
-                    serverConnection = new ServerConnection(settings.ServerInstance, settings.UserName, settings.Password);
+                    this.serverConnection = new ServerConnection(this.settings.ServerInstance, this.settings.UserName, this.settings.Password);
                 }
                 else
                 {
-                    serverConnection = new ServerConnection(settings.ServerInstance);
+                    this.serverConnection = new ServerConnection(this.settings.ServerInstance);
                 }
             }
 
-            if (serverConnection.IsOpen == false)
+            if (this.serverConnection.IsOpen == false)
             {
-                serverConnection.Connect();
+                this.serverConnection.Connect();
             }
         }
 
@@ -224,11 +223,11 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         /// </summary>
         public void Disconnect()
         {
-            if (serverConnection != null)
+            if (this.serverConnection != null)
             {
-                if (serverConnection.IsOpen)
+                if (this.serverConnection.IsOpen)
                 {
-                    serverConnection.Disconnect();
+                    this.serverConnection.Disconnect();
                 }
             }
         }
@@ -244,26 +243,21 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         {
             // set the default properties we want upon partial instantiation - 
             // smo is *really* slow if you don't do this
-            server.SetDefaultInitFields(typeof (Table), "IsSystemObject", "CreateDate");
-            server.SetDefaultInitFields(typeof (StoredProcedure),
-                                        "IsSystemObject",
-                                        "CreateDate");
-            server.SetDefaultInitFields(typeof (UserDefinedFunction),
-                                        "IsSystemObject",
-                                        "CreateDate",
-                                        "FunctionType");
-            server.SetDefaultInitFields(typeof (View), "IsSystemObject", "CreateDate");
-            server.SetDefaultInitFields(typeof (Column), "Identity");
-            server.SetDefaultInitFields(typeof (Index), "IndexKeyType");
+            server.SetDefaultInitFields(typeof(Table), "IsSystemObject", "CreateDate");
+            server.SetDefaultInitFields(typeof(StoredProcedure), "IsSystemObject", "CreateDate");
+            server.SetDefaultInitFields(typeof(UserDefinedFunction), "IsSystemObject", "CreateDate", "FunctionType");
+            server.SetDefaultInitFields(typeof(View), "IsSystemObject", "CreateDate");
+            server.SetDefaultInitFields(typeof(Column), "Identity");
+            server.SetDefaultInitFields(typeof(Index), "IndexKeyType");
         }
 
         /// <summary>
         /// </summary>
         private void MakeSureConnectionIsOpen()
         {
-            if (!IsOpen)
+            if (!this.IsOpen)
             {
-                Connect();
+                this.Connect();
             }
         }
 
@@ -271,21 +265,23 @@ namespace DbFriend.Core.Provider.MsSql.Adapters
         /// </summary>
         /// <returns>
         /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// </exception>
         private IDatabaseWrapper GetDatabase()
         {
-            Server server = new Server(serverConnection);
+            Server server = new Server(this.serverConnection);
 
             OptimizeSmoOperationsWithDefaultInitiFields(server);
 
-            Database database = server.Databases[settings.DatabaseName];
+            Database database = server.Databases[this.settings.DatabaseName];
             if (database == null)
             {
-                throw new ArgumentOutOfRangeException(string.Format("Database does not exist {0}.{1}", serverConnection.ServerInstance, settings.DatabaseName));
+                throw new ArgumentOutOfRangeException(
+                        string.Format("Database does not exist {0}.{1}", this.serverConnection.ServerInstance, this.settings.DatabaseName));
             }
 
             IDatabaseWrapper databaseWrapper = new DatabaseWrapper(database);
             return databaseWrapper;
-
         }
     }
 }
