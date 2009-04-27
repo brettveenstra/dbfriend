@@ -32,16 +32,16 @@ namespace DbFriend.Testing.Unit.Provider.MsSql
         [Test]
         public void Should_Script_Db_In_EasyWay_UsingFactory()
         {
-            IMsSqlDatabase database = this.MockingContext.Get<IMsSqlDatabase>();
+            IMsSqlDatabaseScripter databaseScripter = this.MockingContext.Get<IMsSqlDatabaseScripter>();
             IDbScriptOutputPipeline pipeline = this.MockingContext.AddAdditionalMockFor<IDbScriptOutputPipeline>();
             IDbScriptFolderConfigurationSetting setting = this.MockingContext.Get<IDbScriptFolderConfigurationSetting>();
 
-            database.Expect(x => x.ScriptTo(null, null)).IgnoreArguments();
+            databaseScripter.Expect(x => x.ScriptTo(null, null)).IgnoreArguments();
 
             // act
-            this.Sut.ScriptUsing(pipeline).WithSetting(setting).NotifyingActionsWith(null).ForTheDatabase(database);
+            this.Sut.ScriptUsing(pipeline).WithSetting(setting).NotifyingActionsWith(null).ForTheDatabase(databaseScripter);
 
-            database.VerifyAllExpectations();
+            databaseScripter.VerifyAllExpectations();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace DbFriend.Testing.Unit.Provider.MsSql
         public void Should_Check_That_Setting_Necessary_Dependencies_Through_FluentInterface()
         {
             // act
-            this.Sut.ScriptUsing(null).NotifyingActionsWith(null).ForTheDatabase(this.MockingContext.Get<IMsSqlDatabase>());
+            this.Sut.ScriptUsing(null).NotifyingActionsWith(null).ForTheDatabase(this.MockingContext.Get<IMsSqlDatabaseScripter>());
         }
 
         /// <summary>

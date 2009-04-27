@@ -18,17 +18,18 @@
   </fileset>
 
   <fileset id="db.creation.files">
-    #foreach( $sqlobject in $sqlobjectlist )
-    #if ( $sqlobject.Type = "table" )
-    <include name="${build.dir}baseline\Tables\$sqlobject.Name" />
-    #elseif ( $sqlobject.Type = "storedprocedure" )
-    <include name="${build.dir}baseline\SPs\$sqlobject.Name" />
-    #elseif ( $sqlobject.Type = "view" )
-    <include name="${build.dir}baseline\Views\$sqlobject.Name" />
-    #elseif ( $sqlobject.Type = "function" )
-    <include name="${build.dir}baseline\UDFs\$sqlobject.Name" />
-    #else
-    <include name="${build.dir}baseline\other\$sqlobject.Name" />
+    #foreach($sqlobject in $sqlobjectlist)
+      #if ($sqlobject.Type == "u")
+    <include name="${build.dir}baseline\Tables\$sqlobject.Name" asis="true"/>
+      #elseif ( $sqlobject.Type == "s" )
+    <include name="${build.dir}baseline\SPs\$sqlobject.Name" asis="true"/>
+      #elseif ( $sqlobject.Type == "v" )
+    <include name="${build.dir}baseline\Views\$sqlobject.Name" asis="true"/>
+      #elseif ( $sqlobject.Type == "f" )
+    <include name="${build.dir}baseline\UDFs\$sqlobject.Name" asis="true"/>
+      #else
+    <include name="${build.dir}baseline\other\$sqlobject.Name" asis="true"/>
+      #end
     #end
   </fileset>
 

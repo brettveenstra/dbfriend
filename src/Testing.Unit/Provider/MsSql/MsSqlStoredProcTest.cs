@@ -40,22 +40,6 @@ namespace DbFriend.Testing.Unit.Provider.MsSql
 
         /// <summary>
         /// </summary>
-        [Test]
-        public void Can_Provide_Dependencies()
-        {
-            IMsSqlDependencyRepository dependencyRepository = this.MockingContext.Get<IMsSqlDependencyRepository>();
-
-            dependencyRepository.Expect(x => x.GetDependencies(this.Sut)).Return(this.StubEnumerableMsSqlObjects);
-
-            List<IMsSqlObject> list = new List<IMsSqlObject>(this.Sut.Dependencies);
-
-            list.Count.ShouldBe(2);
-
-            dependencyRepository.VerifyAllExpectations();
-        }
-
-        /// <summary>
-        /// </summary>
         protected override void Before_Each_Spec()
         {
         }

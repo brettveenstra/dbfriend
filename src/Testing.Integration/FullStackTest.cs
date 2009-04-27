@@ -1,28 +1,17 @@
-// --------------------------------------------------------------------------------------------------------------------- 
-// <copyright file="FullStackTest.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   Defines the FullStackTest type.
-// </summary>
-// ---------------------------------------------------------------------------------------------------------------------
+using System.Diagnostics;
+using System.IO;
+using DbFriend.Core;
+using DbFriend.Core.Generator;
+using DbFriend.Core.Generator.Settings;
+using DbFriend.Core.Generator.Targets;
+using DbFriend.Core.Provider.MsSql;
+using DbFriend.Core.Provider.MsSql.Mappers;
+using DbFriend.Testing.Integration.Properties;
+using MbUnit.Framework;
+using StructureMap;
+
 namespace DbFriend.Testing.Integration
 {
-    using System.Diagnostics;
-    using System.IO;
-
-    using DbFriend.Core;
-    using DbFriend.Core.Generator;
-    using DbFriend.Core.Generator.Settings;
-    using DbFriend.Core.Generator.Targets;
-    using DbFriend.Core.Provider.MsSql;
-    using DbFriend.Core.Provider.MsSql.Mappers;
-    using DbFriend.Testing.Integration.Properties;
-
-    using MbUnit.Framework;
-
-    using StructureMap;
-
     /// <summary>
     /// </summary>
     [TestFixture]
@@ -80,7 +69,7 @@ namespace DbFriend.Testing.Integration
         /// </summary>
         [Test]
         [Ignore]
-        public void Test_The_Stack()
+        public void TestTheStack()
         {
             IDbScriptGenerator scriptGenerator = ObjectFactory.GetInstance<IDbScriptGenerator>();
             scriptGenerator.ScriptDb(update => Debug.WriteLine(update.UpdateMessage));

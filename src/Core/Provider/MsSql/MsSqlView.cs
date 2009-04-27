@@ -51,6 +51,11 @@ namespace DbFriend.Core.Provider.MsSql
 
         #region IMsSqlObject Members
 
+        public int Id
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         /// <summary>
         /// Gets Name.
         /// </summary>
@@ -65,6 +70,11 @@ namespace DbFriend.Core.Provider.MsSql
         public string Type
         {
             get { return "view"; }
+        }
+
+        public string Schema
+        {
+            get { throw new NotImplementedException(); }
         }
 
         /// <summary>
@@ -157,6 +167,16 @@ namespace DbFriend.Core.Provider.MsSql
             }
 
             return stringBuilder.ToString();
+        }
+
+        public int Compare(IDbObject x, IDbObject y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Compare(object x, object y)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -14,9 +14,6 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
     /// </summary>
     public class TableMsSqlObjectMapper : ITableAdapterMsSqlObjectMapper
     {
-        /// <summary>
-        /// </summary>
-        private IMsSqlDependencyRepository dependencyRepository;
 
         /// <summary>
         /// </summary>
@@ -31,10 +28,9 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
         /// <param name="dependencyRepository">
         /// The dependency repository.
         /// </param>
-        public TableMsSqlObjectMapper(IMsSqlStatementsTransformer transformer, IMsSqlDependencyRepository dependencyRepository)
+        public TableMsSqlObjectMapper(IMsSqlStatementsTransformer transformer)
         {
             this.transformer = transformer;
-            this.dependencyRepository = dependencyRepository;
         }
 
         #region ITableAdapterMsSqlObjectMapper Members
@@ -48,7 +44,7 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
         /// </returns>
         public IMsSqlObject MapFrom(ITableAdapter from)
         {
-            return new MsSqlTable(from, this.transformer, this.dependencyRepository);
+            return new MsSqlTable(from, this.transformer);
         }
 
         #endregion

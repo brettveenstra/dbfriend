@@ -15,14 +15,12 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
     public class StoredProcedureIDbScriptObjectMapper : IStoredProcedureAdapterMsSqlObjectMapper
     {
         private IMsSqlStatementsTransformer transformer;
-        private IMsSqlDependencyRepository dependencyRepository;
 
         #region IStoredProcedureAdapterMsSqlObjectMapper Members
 
-        public StoredProcedureIDbScriptObjectMapper(IMsSqlStatementsTransformer transformer, IMsSqlDependencyRepository dependencyRepository)
+        public StoredProcedureIDbScriptObjectMapper(IMsSqlStatementsTransformer transformer)
         {
             this.transformer = transformer;
-            this.dependencyRepository = dependencyRepository;
         }
 
         /// <summary>
@@ -34,7 +32,7 @@ namespace DbFriend.Core.Provider.MsSql.Mappers
         /// </returns>
         public IMsSqlObject MapFrom(IStoredProcedureAdapter from)
         {
-            return new MsSqlStoredProc(from, transformer, dependencyRepository);
+            return new MsSqlStoredProc(from, transformer);
         }
 
         #endregion

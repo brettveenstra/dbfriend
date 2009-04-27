@@ -1,9 +1,9 @@
 // --------------------------------------------------------------------------------------------------------------------- 
-// <copyright file="IDatabase.cs" company="">
+// <copyright file="IDatabaseScripter.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   Defines the IDatabase type.
+//   Defines the IDatabaseScripter type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ namespace DbFriend.Core.Provider
 {
     /// <summary>
     /// </summary>
-    public interface IDatabase
+    public interface IDatabaseScripter
     {
         /// <summary>
         /// </summary>

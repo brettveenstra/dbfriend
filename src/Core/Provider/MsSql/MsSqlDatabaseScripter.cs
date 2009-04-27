@@ -1,9 +1,9 @@
 // --------------------------------------------------------------------------------------------------------------------- 
-// <copyright file="MsSqlDatabase.cs" company="">
+// <copyright file="MsSqlDatabaseScripter.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   Defines the MsSqlDatabase type.
+//   Defines the MsSqlDatabaseScripter type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
 using System;
@@ -16,7 +16,7 @@ namespace DbFriend.Core.Provider.MsSql
 {
     /// <summary>
     /// </summary>
-    public class MsSqlDatabase : IMsSqlDatabase
+    public class MsSqlDatabaseScripter : IMsSqlDatabaseScripter
     {
         /// <summary>
         /// </summary>
@@ -39,7 +39,7 @@ namespace DbFriend.Core.Provider.MsSql
         private readonly IMsSqlViewStreamWriterAdapterMapper viewMapper;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MsSqlDatabase"/> class.
+        /// Initializes a new instance of the <see cref="MsSqlDatabaseScripter"/> class.
         /// </summary>
         /// <param name="connectionAdapter">
         /// The connection adapter.
@@ -53,7 +53,7 @@ namespace DbFriend.Core.Provider.MsSql
         /// </param>
         /// <param name="functionMapper">
         /// </param>
-        public MsSqlDatabase(
+        public MsSqlDatabaseScripter(
                 IMsSqlDatabaseConnectionAdapter connectionAdapter,
                 IMsSqlStoredProcStreamWriterAdapterMapper storedProcMapper,
                 IMsSqlTableStreamWriterAdapterMapper tableMapper,
@@ -67,7 +67,7 @@ namespace DbFriend.Core.Provider.MsSql
             this.storedProcMapper = storedProcMapper;
         }
 
-        #region IMsSqlDatabase Members
+        #region IMsSqlDatabaseScripter Members
 
         /// <summary>
         /// </summary>

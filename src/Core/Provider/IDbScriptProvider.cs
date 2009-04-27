@@ -43,9 +43,9 @@ namespace DbFriend.Core.Provider
 
         /// <summary>
         /// </summary>
-        /// <param name="databaseToScript">
+        /// <param name="databaseScripter">
         /// The database to script.
         /// </param>
-        void ForTheDatabase(IDatabase databaseToScript);
+        void ForTheDatabase(IDatabaseScripter databaseScripter);
     }
 }

@@ -1,16 +1,16 @@
 // --------------------------------------------------------------------------------------------------------------------- 
-// <copyright file="IMsSqlDatabase.cs" company="">
+// <copyright file="IMsSqlDatabaseScripter.cs" company="">
 //   
 // </copyright>
 // <summary>
-//   Defines the IMsSqlDatabase type.
+//   Defines the IMsSqlDatabaseScripter type.
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
 namespace DbFriend.Core.Provider.MsSql
 {
     /// <summary>
     /// </summary>
-    public interface IMsSqlDatabase : IDatabase
+    public interface IMsSqlDatabaseScripter : IDatabaseScripter
     {
     }
 }

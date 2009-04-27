@@ -79,9 +79,11 @@
   <ItemGroup>
     <Compile Include="Generator\DbScriptGeneratorTest.cs" />
     <Compile Include="Generator\DbScriptOutputFolderPipelineTest.cs" />
+    <Compile Include="Graph\DependencyGraphTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Provider\MsSql\MsSqlDbTest.cs" />
+    <Compile Include="Provider\MsSql\MsSqlDbUserObjectRepositoryTest.cs" />
     <Compile Include="Provider\MsSql\MsSqlDatabaseTest.cs" />
-    <Compile Include="Provider\MsSql\MsSqlDependencyRepositoryTest.cs" />
     <Compile Include="Provider\MsSql\MsSqlScriptProviderTest.cs" />
     <Compile Include="Provider\MsSql\MsSqlStoredProcTest.cs" />
     <Compile Include="Provider\MsSql\MsSqlTableTest.cs" />
@@ -99,7 +101,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Graph\" />
     <Folder Include="Provider\MsSql\Adapters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
