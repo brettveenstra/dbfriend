@@ -24,7 +24,6 @@ namespace DbFriend.Core.Provider.MsSql
         private readonly ITableAdapter table;
 
         private readonly IMsSqlStatementsTransformer transformer;
-        private IMsSqlDependencyRepository dependencyRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MsSqlTable"/> class.
@@ -36,15 +35,18 @@ namespace DbFriend.Core.Provider.MsSql
         /// <param name="dependencyRepository"></param>
         public MsSqlTable(
             ITableAdapter table,
-            IMsSqlStatementsTransformer transformer,
-            IMsSqlDependencyRepository dependencyRepository)
+            IMsSqlStatementsTransformer transformer)
         {
             this.table = table;
             this.transformer = transformer;
-            this.dependencyRepository = dependencyRepository;
         }
 
         #region IMsSqlTable Members
+
+        public int Id
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         /// <summary>
         /// Gets Name.
@@ -62,6 +64,11 @@ namespace DbFriend.Core.Provider.MsSql
             get { return "table"; }
         }
 
+        public string Schema
+        {
+            get { throw new NotImplementedException(); }
+        }
+
         /// <summary>
         /// Gets Owner.
         /// </summary>
@@ -71,17 +78,6 @@ namespace DbFriend.Core.Provider.MsSql
         public string Owner
         {
             get { return table.Owner; }
-        }
-
-        public IEnumerable<IMsSqlObject> Dependencies
-        {
-            get
-            {
-                foreach (IMsSqlObject sqlObject in dependencyRepository.GetDependencies(this))
-                {
-                    yield return sqlObject;
-                }
-            }
         }
 
         public string UrnString
@@ -163,6 +159,16 @@ namespace DbFriend.Core.Provider.MsSql
             }
 
             return stringBuilder.ToString();
+        }
+
+        public int Compare(IDbObject x, IDbObject y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Compare(object x, object y)
+        {
+            throw new NotImplementedException();
         }
     }
 }

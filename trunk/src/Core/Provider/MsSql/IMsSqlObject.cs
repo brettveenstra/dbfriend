@@ -9,8 +9,6 @@
 
 namespace DbFriend.Core.Provider.MsSql
 {
-    using System.Collections.Generic;
-
     /// <summary>
     /// </summary>
     public interface IMsSqlObject : IDbScriptObject
@@ -22,14 +20,6 @@ namespace DbFriend.Core.Provider.MsSql
         /// The owner.
         /// </value>
         string Owner { get; }
-
-        /// <summary>
-        /// Gets Dependencies.
-        /// </summary>
-        /// <value>
-        /// The dependencies.
-        /// </value>
-        IEnumerable<IMsSqlObject> Dependencies { get; }
 
         /// <summary>
         /// Gets UrnString.

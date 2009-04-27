@@ -11,21 +11,8 @@ namespace DbFriend.Core.Provider
 {
     /// <summary>
     /// </summary>
-    public interface IDbScriptObject
+    public interface IDbScriptObject : IDbObject
     {
-        /// <summary>
-        /// Gets DbObjectName.
-        /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
-        string Name { get; }
-
-        /// <summary>
-        /// Gets Type of Object.
-        /// </summary>
-        string Type { get; }
-
         /// <summary>
         /// </summary>
         /// <returns>

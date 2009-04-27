@@ -155,24 +155,31 @@
     <Compile Include="Generator\VelocityFileGenerator.cs" />
     <Compile Include="Generator\VelocityFileTransformer.cs" />
     <Compile Include="Generator\Vs2008SolutionGenerator.cs" />
+    <Compile Include="Graph\DbDependencyEdge.cs" />
+    <Compile Include="Graph\DependencyGraph.cs" />
+    <Compile Include="Graph\IDbDependencyEdge.cs" />
     <Compile Include="Graph\IDependencyGraph.cs" />
     <Compile Include="IScriptLogger.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ISpecification.cs" />
+    <Compile Include="Provider\DbObject.cs" />
     <Compile Include="Provider\DbScriptObjectUpdate.cs" />
-    <Compile Include="Provider\IDatabase.cs" />
+    <Compile Include="Provider\IDatabaseScripter.cs" />
+    <Compile Include="Provider\IDbObject.cs" />
     <Compile Include="Provider\IDbScriptObject.cs" />
     <Compile Include="Provider\IDbScriptObjectUpdate.cs" />
     <Compile Include="Provider\IDbScriptProvider.cs" />
     <Compile Include="IMapper.cs" />
     <Compile Include="Provider\IDbScriptProviderFactory.cs" />
+    <Compile Include="Provider\IDependencyGenerator.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlDbUserObjectRepository.cs" />
+    <Compile Include="Provider\MsSql\IServerConnectionFactory.cs" />
+    <Compile Include="Provider\MsSql\MsSqlDb.cs" />
+    <Compile Include="Provider\MsSql\MsSqlDependencyGenerator.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlDb.cs" />
     <Compile Include="Provider\MsSql\Adapters\BaselineScriptingOptionsAdapter.cs" />
     <Compile Include="Provider\MsSql\Adapters\DatabaseWrapper.cs" />
-    <Compile Include="Provider\MsSql\Adapters\DependencyTreeNodeAdapter.cs" />
-    <Compile Include="Provider\MsSql\Adapters\DependencyWalkerAdapter.cs" />
     <Compile Include="Provider\MsSql\Adapters\IDatabaseWrapper.cs" />
-    <Compile Include="Provider\MsSql\Adapters\IDependencyTreeNodeAdapter.cs" />
-    <Compile Include="Provider\MsSql\Adapters\IDependencyWalkerAdapter.cs" />
     <Compile Include="Provider\MsSql\Adapters\ISqlSmoObjectAdapter.cs" />
     <Compile Include="Provider\MsSql\Adapters\IStoredProcedureAdapter.cs" />
     <Compile Include="Provider\MsSql\Adapters\ITableAdapter.cs" />
@@ -182,11 +189,8 @@
     <Compile Include="Provider\MsSql\Adapters\TableAdapter.cs" />
     <Compile Include="Provider\MsSql\Adapters\UserDefinedFunctionAdapter.cs" />
     <Compile Include="Provider\MsSql\Adapters\ViewAdapter.cs" />
-    <Compile Include="Provider\MsSql\DependencyTreeNodeMsSqlObjectMapper.cs" />
-    <Compile Include="Provider\MsSql\IMsSqlDependencyRepository.cs" />
-    <Compile Include="Provider\MsSql\IDependencyTreeNodeAdapterMsSqlObjectMapper.cs" />
     <Compile Include="Provider\MsSql\IMsSqlConnectionSettings.cs" />
-    <Compile Include="Provider\MsSql\IMsSqlDatabase.cs" />
+    <Compile Include="Provider\MsSql\IMsSqlDatabaseScripter.cs" />
     <Compile Include="Provider\MsSql\Adapters\IMsSqlDatabaseConnectionAdapter.cs" />
     <Compile Include="Provider\IRepository.cs" />
     <Compile Include="Provider\MsSql\IMsSqlStatementsTransformer.cs" />
@@ -204,7 +208,7 @@
     </Compile>
     <Compile Include="Provider\MsSql\MsSqlConnectionSettingsBase.cs" />
     <Compile Include="Provider\MsSql\MsSqlCredentialMethod.cs" />
-    <Compile Include="Provider\MsSql\MsSqlDatabase.cs" />
+    <Compile Include="Provider\MsSql\MsSqlDatabaseScripter.cs" />
     <Compile Include="Provider\MsSql\Adapters\MsSqlDatabaseConnectionAdapter.cs" />
     <Compile Include="Provider\MsSql\IMsSqlUserFunction.cs" />
     <Compile Include="Provider\MsSql\IMsSqlObject.cs" />
@@ -213,7 +217,7 @@
     <Compile Include="Provider\MsSql\IMsSqlTable.cs" />
     <Compile Include="Provider\MsSql\IMsSqlView.cs" />
     <Compile Include="Provider\MsSql\Mappers\MsSqlFunctionStreamWriterAdapterMapper.cs" />
-    <Compile Include="Provider\MsSql\MsSqlDependencyRepository.cs" />
+    <Compile Include="Provider\MsSql\MsSqlDbUserObjectRepository.cs" />
     <Compile Include="Provider\MsSql\MsSqlIntegratedConnectionSettings.cs" />
     <Compile Include="Provider\MsSql\MsSqlServerRegistry.cs" />
     <Compile Include="Provider\MsSql\MsSqlStatementsTransformer.cs" />
@@ -229,6 +233,7 @@
     <Compile Include="Provider\MsSql\Mappers\TableMsSqlObjectMapper.cs" />
     <Compile Include="Provider\MsSql\Mappers\UserDefinedFunctionSqlObjectMapper.cs" />
     <Compile Include="Provider\MsSql\Mappers\ViewMsSqlObjectMapper.cs" />
+    <Compile Include="Provider\MsSql\ServerConnectionFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Provider\MsSql\MsSqlProvider Diagram.cd" />

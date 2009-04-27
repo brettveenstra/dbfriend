@@ -20,7 +20,7 @@ namespace DbFriend.Core.Generator
     {
         /// <summary>
         /// </summary>
-        private readonly IDatabase database;
+        private readonly IDatabaseScripter databaseScripter;
 
         /// <summary>
         /// </summary>
@@ -43,16 +43,16 @@ namespace DbFriend.Core.Generator
         /// <param name="provider">
         /// The provider.
         /// </param>
-        /// <param name="database">
+        /// <param name="databaseScripter">
         /// </param>
         /// <param name="setting">
         /// </param>
         public DbScriptGenerator(
-                IDbScriptProvider provider, IDatabase database, IDbScriptOutputPipeline outputPipeline, IDbScriptFolderConfigurationSetting setting)
+                IDbScriptProvider provider, IDatabaseScripter databaseScripter, IDbScriptOutputPipeline outputPipeline, IDbScriptFolderConfigurationSetting setting)
         {
             this.provider = provider;
             this.setting = setting;
-            this.database = database;
+            this.databaseScripter = databaseScripter;
             this.outputPipeline = outputPipeline;
         }
 
@@ -65,7 +65,7 @@ namespace DbFriend.Core.Generator
         /// </param>
         public void ScriptDb(Action<IDbScriptObjectUpdate> updateAction)
         {
-            this.provider.ScriptUsing(this.outputPipeline).NotifyingActionsWith(updateAction).WithSetting(this.setting).ForTheDatabase(this.database);
+            this.provider.ScriptUsing(this.outputPipeline).NotifyingActionsWith(updateAction).WithSetting(this.setting).ForTheDatabase(this.databaseScripter);
         }
 
         #endregion

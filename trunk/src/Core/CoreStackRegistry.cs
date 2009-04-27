@@ -1,21 +1,13 @@
-// --------------------------------------------------------------------------------------------------------------------- 
-// <copyright file="CoreStackRegistry.cs" company="">
-//   
-// </copyright>
-// <summary>
-//   Defines the CoreStackRegistry type.
-// </summary>
-// ---------------------------------------------------------------------------------------------------------------------
+using DbFriend.Core.Generator;
+using DbFriend.Core.Provider.MsSql;
+using DbFriend.Core.Provider.MsSql.Adapters;
+using DbFriend.Core.Provider.MsSql.Mappers;
+using StructureMap.Configuration.DSL;
+
 namespace DbFriend.Core
 {
-    using DbFriend.Core.Generator;
-    using DbFriend.Core.Provider.MsSql;
-    using DbFriend.Core.Provider.MsSql.Adapters;
-    using DbFriend.Core.Provider.MsSql.Mappers;
-
-    using StructureMap.Configuration.DSL;
-
     /// <summary>
+    /// Defines dependencies for Core
     /// </summary>
     public class CoreStackRegistry : Registry
     {
@@ -25,21 +17,18 @@ namespace DbFriend.Core
         /// </summary>
         public CoreStackRegistry()
         {
-            this.ForRequestedType<IMsSqlDatabaseConnectionAdapter>().TheDefault.Is.OfConcreteType<MsSqlDatabaseConnectionAdapter>();
+            ForRequestedType<IMsSqlDatabaseConnectionAdapter>().TheDefault.Is.OfConcreteType<MsSqlDatabaseConnectionAdapter>();
 
-            this.ForRequestedType<IDbScriptGenerator>().TheDefaultIsConcreteType<DbScriptGenerator>();
+            ForRequestedType<IDbScriptGenerator>().TheDefaultIsConcreteType<DbScriptGenerator>();
 
-            this.ForRequestedType<IStoredProcedureAdapterMsSqlObjectMapper>().TheDefaultIsConcreteType<StoredProcedureIDbScriptObjectMapper>();
-            this.ForRequestedType<ITableAdapterMsSqlObjectMapper>().TheDefaultIsConcreteType<TableMsSqlObjectMapper>();
-            this.ForRequestedType<IViewAdapterMsSqlObjectMapper>().TheDefaultIsConcreteType<ViewMsSqlObjectMapper>();
-            this.ForRequestedType<IUserDefinedFunctionAdapterSqlObjectMapper>().TheDefaultIsConcreteType<UserDefinedFunctionSqlObjectMapper>();
+            ForRequestedType<IStoredProcedureAdapterMsSqlObjectMapper>().TheDefaultIsConcreteType<StoredProcedureIDbScriptObjectMapper>();
+            ForRequestedType<ITableAdapterMsSqlObjectMapper>().TheDefaultIsConcreteType<TableMsSqlObjectMapper>();
+            ForRequestedType<IViewAdapterMsSqlObjectMapper>().TheDefaultIsConcreteType<ViewMsSqlObjectMapper>();
+            ForRequestedType<IUserDefinedFunctionAdapterSqlObjectMapper>().TheDefaultIsConcreteType<UserDefinedFunctionSqlObjectMapper>();
 
-            this.ForRequestedType<IVelocityFileGenerator>().TheDefaultIsConcreteType<VelocityFileGenerator>();
+            ForRequestedType<IVelocityFileGenerator>().TheDefaultIsConcreteType<VelocityFileGenerator>();
 
-            this.ForRequestedType<IMsSqlStatementsTransformer>().TheDefaultIsConcreteType<MsSqlStatementsTransformer>();
-            this.ForRequestedType<IDependencyTreeNodeAdapterMsSqlObjectMapper>().TheDefaultIsConcreteType<DependencyTreeNodeMsSqlObjectMapper>();
-
-            this.ForRequestedType<IMsSqlDependencyRepository>().TheDefaultIsConcreteType<MsSqlDependencyRepository>();
+            ForRequestedType<IMsSqlStatementsTransformer>().TheDefaultIsConcreteType<MsSqlStatementsTransformer>();
         }
     }
 }

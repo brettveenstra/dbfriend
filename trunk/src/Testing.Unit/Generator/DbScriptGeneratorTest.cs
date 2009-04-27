@@ -28,7 +28,7 @@ namespace DbFriend.Testing.Unit.Generator
         [Test]
         public void ScriptDb_Top_Down()
         {
-            IDatabase connection = this.MockingContext.Get<IDatabase>();
+            IDatabaseScripter connection = this.MockingContext.Get<IDatabaseScripter>();
             IDbScriptOutputPipeline pipeline = this.MockingContext.Get<IDbScriptOutputPipeline>();
             IDbScriptProvider provider = this.MockingContext.Get<IDbScriptProvider>();
             IDbScriptFolderConfigurationSetting setting = this.MockingContext.Get<IDbScriptFolderConfigurationSetting>();

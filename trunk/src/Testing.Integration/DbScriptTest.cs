@@ -33,7 +33,7 @@ namespace DbFriend.Testing.Integration
             ObjectFactory.Initialize(x => x.AddRegistry(new IntegrationTestRegistry(MsSqlCredentialMethod.SqlUser)));
             IDbScriptGenerator generator = new DbScriptGenerator(
                     ObjectFactory.GetInstance<IMsSqlScriptProvider>(),
-                    ObjectFactory.GetInstance<IDatabase>(),
+                    ObjectFactory.GetInstance<IDatabaseScripter>(),
                     ObjectFactory.GetInstance<IDbScriptOutputPipeline>(),
                     ObjectFactory.GetInstance<IDbScriptFolderConfigurationSetting>());
 
@@ -48,7 +48,7 @@ namespace DbFriend.Testing.Integration
             ObjectFactory.Initialize(x => x.AddRegistry(new IntegrationTestRegistry(MsSqlCredentialMethod.Integrated)));
             IDbScriptGenerator generator = new DbScriptGenerator(
                     ObjectFactory.GetInstance<IMsSqlScriptProvider>(),
-                    ObjectFactory.GetInstance<IDatabase>(),
+                    ObjectFactory.GetInstance<IDatabaseScripter>(),
                     ObjectFactory.GetInstance<IDbScriptOutputPipeline>(),
                     ObjectFactory.GetInstance<IDbScriptFolderConfigurationSetting>());
 

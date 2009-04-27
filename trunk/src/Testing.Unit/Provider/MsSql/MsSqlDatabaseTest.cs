@@ -25,7 +25,7 @@ namespace DbFriend.Testing.Unit.Provider.MsSql
     /// <summary>
     /// </summary>
     [TestFixture]
-    public class MsSqlDatabaseTest : Specification<MsSqlDatabase>
+    public class MsSqlDatabaseTest : Specification<MsSqlDatabaseScripter>
     {
         /// <summary>
         /// Gets StubbedEnumerableMsSqlObjects.

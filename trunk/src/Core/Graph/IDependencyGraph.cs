@@ -1,10 +1,13 @@
 using System.Collections.Generic;
-using DbFriend.Core.Provider.MsSql;
+using DbFriend.Core.Provider;
 
 namespace DbFriend.Core.Graph
 {
     public interface IDependencyGraph
     {
-        IEnumerable<IMsSqlObject> OrderedDependencies { get; }
+        IEnumerable<IDbObject> Dependencies { get; }
+        IEnumerable<IDbObject> DbObjects { get; }
+        void AddDependency(IDbObject child, IDbObject parent);
+        void AddDbObject(IDbObject dbObject);
     }
 }

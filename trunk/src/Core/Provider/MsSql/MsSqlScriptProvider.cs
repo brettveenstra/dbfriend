@@ -71,12 +71,12 @@ namespace DbFriend.Core.Provider.MsSql
 
         /// <summary>
         /// </summary>
-        /// <param name="databaseToScript">
+        /// <param name="databaseScripter">
         /// The database to script.
         /// </param>
         /// <exception cref="InvalidOperationException">
         /// </exception>
-        public void ForTheDatabase(IDatabase databaseToScript)
+        public void ForTheDatabase(IDatabaseScripter databaseScripter)
         {
             if (pipeline == null)
             {
@@ -88,7 +88,7 @@ namespace DbFriend.Core.Provider.MsSql
                 throw new InvalidOperationException("Must initialize a IDbScriptFolderConfigurationSetting");
             }
 
-            databaseToScript.ScriptTo(pipeline, notifyAction);
+            databaseScripter.ScriptTo(pipeline, notifyAction);
         }
 
         #endregion
