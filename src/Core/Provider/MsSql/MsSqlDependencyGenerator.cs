@@ -66,7 +66,7 @@ namespace DbFriend.Core.Provider.MsSql
 
         private static IDbObject CreateDbObjectFrom(int id, string name, string type, string schema)
         {
-            return new DbObject(id, name.Trim(), type.Trim(), schema);
+            return new DbObject(id, name.Trim(), type.Trim(), schema.Replace('\\', '_'));
         }
 
         private static DbObject CreateDbObjectFrom(DataRow row)
@@ -74,7 +74,7 @@ namespace DbFriend.Core.Provider.MsSql
             var id = (int) row["id"];
             string name = row["name"].ToString();
             string type = row["xtype"].ToString();
-            string schema = row["schema"].ToString();
+            string schema = row["schema"].ToString().Replace('\\', '_');
 
             return new DbObject(id, name, type, schema);
         }

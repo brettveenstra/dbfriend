@@ -1,8 +1,18 @@
-using System.Collections;
+// --------------------------------------------------------------------------------------------------------------------- 
+// <copyright file="VelocityFileGenerator.cs" company="">
+//   
+// </copyright>
+// <summary>
+//   Defines the VelocityFileGenerator type.
+// </summary>
+// ---------------------------------------------------------------------------------------------------------------------
+
 using System.IO;
 
 namespace DbFriend.Core.Generator
 {
+    using NVelocity;
+
     public class VelocityFileGenerator : IVelocityFileGenerator
     {
         private readonly IVelocityFileTransformer velocityTransformer;
@@ -12,7 +22,7 @@ namespace DbFriend.Core.Generator
             this.velocityTransformer = velocityTransformer;
         }
 
-        public void Generate(string templatePath, string outputFile, Hashtable velocityContext)
+        public void Generate(string templatePath, string outputFile, VelocityContext velocityContext)
         {
             if (File.Exists(outputFile))
             {

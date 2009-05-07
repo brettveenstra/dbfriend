@@ -7,14 +7,14 @@
 // </summary>
 // ---------------------------------------------------------------------------------------------------------------------
 
-using System.Collections;
-
 namespace DbFriend.Core.Generator
 {
+    using NVelocity;
+
     /// <summary>
     /// </summary>
     public interface IVelocityFileGenerator
     {
-        void Generate(string templatePath, string outputFile, Hashtable velocityContext);
+        void Generate(string templatePath, string outputFile, VelocityContext velocityContext);
     }
 }
