@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<project name="DbFriend.CI" default="test">
+
+  <include buildfile="DbFriend.core.build" />
+
+  <echo message="Loading CI Server.xml" />
+  <include buildfile="ciserver.properties.xml" />
+
+</project>
