@@ -58,7 +58,7 @@
 	</target>
 	
 	<target name="run-tests" depends="setup.integration.db">
-    <property name="test-runner.exe.args" value='/wd:. /rd:${build.dir}\test-reports /rt:XML /rnf:Coverage /r:NCover /rp:NCoverArguments="/eas Gallio" "DbFriend.Testing.Unit.dll" "DbFriend.Testing.Integration.dll"' />
+    <property name="test-runner.exe.args" value='/wd:. /rd:${build.dir}\test-reports /e:TeamCityExtension,Gallio.TeamCityIntegration /rt:XML /rnf:Coverage /r:NCover /rp:NCoverArguments="/eas Gallio" "DbFriend.Testing.Unit.dll" "DbFriend.Testing.Integration.dll"' />
     <echo message="Args: [${test-runner.exe.args}]" />
     <mkdir dir="${build.dir}\test-reports" />
 		<exec program="${test-runner.exe}" workingdir="${build.dir.drop}\Testing.Integration">
