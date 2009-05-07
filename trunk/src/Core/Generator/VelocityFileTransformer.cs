@@ -44,12 +44,12 @@ namespace DbFriend.Core.Generator
         /// </param>
         /// <returns>
         /// </returns>
-        public string Transform(string velocityTemplatePath, Hashtable velocityContext)
+        public string Transform(string velocityTemplatePath, VelocityContext velocityContext)
         {
             string output;
             using (StringWriter writer = new StringWriter())
             {
-                configuredEngine.MergeTemplate(velocityTemplatePath, new VelocityContext(velocityContext), writer);
+                configuredEngine.MergeTemplate(velocityTemplatePath, velocityContext, writer);
                 output = writer.ToString();
             }
 

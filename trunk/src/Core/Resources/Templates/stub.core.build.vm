@@ -14,23 +14,22 @@
     <include name="${build.dir}\sandbox\01_CreateSandbox.sql" asis="true"/>
     <include name="${build.dir}\sandbox\02_SetupExternalDependencies.sql" asis="true"/>
     <include name="${build.dir}\sandbox\03_DefineSynonyms.sql" asis="true"/>
-    <include name="${build.dir}\sandbox\04_BuildShell.sql" asis="true"/>
   </fileset>
 
   <fileset id="db.creation.files">
-    #foreach($sqlobject in $sqlobjectlist)
-      #if ($sqlobject.Type == "u")
-    <include name="${build.dir}baseline\Tables\$sqlobject.Name" asis="true"/>
-      #elseif ( $sqlobject.Type == "s" )
-    <include name="${build.dir}baseline\SPs\$sqlobject.Name" asis="true"/>
-      #elseif ( $sqlobject.Type == "v" )
-    <include name="${build.dir}baseline\Views\$sqlobject.Name" asis="true"/>
-      #elseif ( $sqlobject.Type == "f" )
-    <include name="${build.dir}baseline\UDFs\$sqlobject.Name" asis="true"/>
-      #else
-    <include name="${build.dir}baseline\other\$sqlobject.Name" asis="true"/>
-      #end
-    #end
+#foreach ($sqlobject in $sqlobjectlist)
+#if($sqlobject.Type == "u")
+    <include name="${build.dir}\baseline\Tables\\${sqlobject.Schema}.${sqlobject.Name}.TAB" asis="true"/>
+#elseif ( $sqlobject.Type == "p" )
+    <include name="${build.dir}\baseline\SPs\\${sqlobject.Schema}.${sqlobject.Name}.PRC" asis="true"/>
+#elseif ( $sqlobject.Type == "v" )
+    <include name="${build.dir}\baseline\Views\\${sqlobject.Schema}.${sqlobject.Name}.VIW" asis="true"/>
+#elseif ( $sqlobject.Type == "fn" )
+    <include name="${build.dir}\baseline\UDFs\\${sqlobject.Schema}.${sqlobject.Name}.UDF" asis="true"/>
+#else
+    <include name="${build.dir}\baseline\other\\${sqlobject.Schema}.${sqlobject.Name}.SQL" asis="true"/>
+#end
+#end
   </fileset>
 
   <fileset id="db.load.files">

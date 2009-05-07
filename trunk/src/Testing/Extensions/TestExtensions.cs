@@ -28,7 +28,7 @@ namespace DbFriend.Testing.Extensions
         /// </param>
         public static void ShouldBe(this int value, int expected)
         {
-            Assert.AreEqual(expected, value);
+            Assert.IsTrue(expected == value);
         }
 
         /// <summary>
