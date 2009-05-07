@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<properties>
+  <property name="sql.tools.path" value="D:\Program Files\Microsoft SQL Server\100\tools\binn"/>
+  <property name="sql.command.runner" value="osql.exe"/>
+  <property name="osql.exe" value="${sql.tools.path}\${sql.command.runner}"/>
+</properties>
